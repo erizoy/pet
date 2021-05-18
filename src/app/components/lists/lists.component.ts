@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { ListService } from '../../modules/shared/services/list/list.service';
 
 @Component({
-  selector: 'pet-lists',
+  selector: 'two-todo-lists',
   templateUrl: './lists.component.html',
   styleUrls: ['./lists.component.scss']
 })

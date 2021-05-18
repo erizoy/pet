@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { AuthService } from '../../modules/shared/services/auth/auth.service';
 
 @Component({
-  selector: 'pet-user-menu',
+  selector: 'two-todo-user-menu',
   templateUrl: './user-menu.component.html',
   styleUrls: ['./user-menu.component.scss']
 })

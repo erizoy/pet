@@ -1,6 +1,6 @@
 {
-  "name": "pet",
-  "version": "0.0.0",
+  "name": "two-todo",
+  "version": "0.0.1",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",

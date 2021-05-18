@@ -1,7 +1,7 @@
 <ng-container *ngIf="taskService.tasks$ | async as tasks; else selectList">
   <mat-list class="list">
     <mat-list-item *ngFor="let task of tasks" class="list-item">
-      <div petSwipe (swipeEnd)="processAction($event, task)" class="list-item-content">
+      <div twoTodoSwipe (swipeEnd)="processAction($event, task)" class="list-item-content">
         <del *ngIf="task.status; else undone">{{task.text}}</del>
         <ng-template #undone><span>{{task.text}}</span></ng-template>
         <div class="list-item-actions">

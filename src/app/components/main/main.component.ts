@@ -5,7 +5,7 @@ import { ListService } from '../../modules/shared/services/list/list.service';
 import { BaseComponent } from '../../modules/shared/components/base/base.component';
 
 @Component({
-  selector: 'pet-main',
+  selector: 'two-todo-main',
   templateUrl: './main.component.html',
   styleUrls: ['./main.component.scss']
 })

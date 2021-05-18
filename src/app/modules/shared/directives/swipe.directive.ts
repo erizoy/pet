@@ -4,7 +4,7 @@ import { elementAt, filter, map, switchMap, take, takeUntil, tap } from 'rxjs/op
 import { SwipeCoords, SwipeEvent } from '../../../models/swipe-event';
 
 @Directive({
-  selector: '[petSwipe]'
+  selector: '[twoTodoSwipe]'
 })
 export class SwipeDirective implements OnInit, OnDestroy {
   @HostBinding('class.toggle-ready') get toggleReadyClass(): boolean {
@@ -76,7 +76,9 @@ export class SwipeDirective implements OnInit, OnDestroy {
   }
 
   private emitSwipeEndEvent(): void {
-    this.swipeEnd.emit(this.swipeEventByDelta());
+    if (Math.abs(this.#delta) > window.innerWidth * 0.3) {
+      this.swipeEnd.emit(this.swipeEventByDelta());
+    }
     this.#delta = 0;
   }
 

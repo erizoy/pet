@@ -8,7 +8,7 @@ import { SwipeEvent } from '../../models/swipe-event';
 import { ListTask } from '../../models/list';
 
 @Component({
-  selector: 'pet-list',
+  selector: 'two-todo-list',
   templateUrl: './list.component.html',
   styleUrls: ['./list.component.scss']
 })

@@ -17,7 +17,7 @@ speed-measure-plugin*.json
 # IDEs and editors
 /.idea
 .project
-.classpath
+.classpathz
 .c9/
 *.launch
 .settings/
@@ -41,6 +41,7 @@ yarn-error.log
 testem.log
 /typings
 package-lock.json
+.firebase
 
 # System Files
 .DS_Store

@@ -3,7 +3,7 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { AuthService } from '../../modules/shared/services/auth/auth.service';
 
 @Component({
-  selector: 'pet-login-form',
+  selector: 'two-todo-login-form',
   templateUrl: './login-form.component.html',
   styleUrls: ['./login-form.component.scss']
 })

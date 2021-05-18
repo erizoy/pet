@@ -5,13 +5,13 @@
 export const environment = {
   production: false,
   firebase: {
-    apiKey: 'AIzaSyCTLTpIgsJDXc20DTTCsKq61Blc5HKtDGc',
-    authDomain: 'pet-rest.firebaseapp.com',
-    databaseURL: 'https://pet-rest-default-rtdb.europe-west1.firebasedatabase.app',
-    projectId: 'pet-rest',
-    storageBucket: 'pet-rest.appspot.com',
-    messagingSenderId: '424220600652',
-    appId: '1:424220600652:web:3e69bd02d842d754e1c7e9'
+    apiKey: 'AIzaSyBtew16D6VPv41dz-ubIsSizcw0thz7Hqo',
+    authDomain: 'two-todo.firebaseapp.com',
+    databaseURL: 'https://two-todo-default-rtdb.europe-west1.firebasedatabase.app',
+    projectId: 'two-todo',
+    storageBucket: 'two-todo.appspot.com',
+    messagingSenderId: '246115912358',
+    appId: '1:246115912358:web:942dca9f6038b9c6950267'
   }
 };
 

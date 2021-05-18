@@ -22,13 +22,13 @@
     "directive-selector": [
       true,
       "attribute",
-      "pet",
+      "twoTodo",
       "camelCase"
     ],
     "component-selector": [
       true,
       "element",
-      "pet",
+      "two-todo",
       "kebab-case"
     ],
     "eofline": true,

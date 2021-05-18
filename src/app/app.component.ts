@@ -3,7 +3,7 @@ import { AuthService } from './modules/shared/services/auth/auth.service';
 import { ListService } from './modules/shared/services/list/list.service';
 
 @Component({
-  selector: 'pet-root',
+  selector: 'two-todo-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
