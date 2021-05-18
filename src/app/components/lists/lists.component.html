@@ -1,0 +1,15 @@
+<mat-nav-list>
+  <a mat-list-item *ngFor="let item of listService.lists$ | async" (click)="openList(item.uuid)">
+    {{ item.title }}
+  </a>
+  <div class="list-new">
+    <mat-form-field appearance="fill">
+      <mat-label><mat-icon>playlist_add</mat-icon> new list</mat-label>
+      <input
+        matInput
+        [(ngModel)]="newList"
+        (keyup.enter)="create()"
+        autocomplete="off"/>
+    </mat-form-field>
+  </div>
+</mat-nav-list>

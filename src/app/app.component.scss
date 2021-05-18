@@ -1,0 +1,12 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
+
+  &-title {
+    display: flex;
+    align-items: center;
+    margin-bottom: 0;
+    line-height: 40px;
+  }
+}

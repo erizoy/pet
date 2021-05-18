@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "pet-rest": {
+      "hosting": {
+        "pet": [
+          "pet-rest"
+        ]
+      }
+    }
+  }
+}

@@ -1,0 +1,17 @@
+<ng-container *ngIf="auth.user$ | async as user; else loginTitle">
+  <button
+    mat-icon-button
+    color="primary"
+    aria-label="User menu"
+    [matMenuTriggerFor]="menu"
+  >
+    <mat-icon>menu</mat-icon>
+  </button>
+  <mat-menu #menu="matMenu">
+    <h3 mat-menu-item>{{user.email}}</h3>
+    <button mat-menu-item (click)="logout()">Logout</button>
+  </mat-menu>
+</ng-container>
+<ng-template #loginTitle>
+  <h1 class="login-title"><span>Login</span> <mat-icon>face</mat-icon></h1>
+</ng-template>

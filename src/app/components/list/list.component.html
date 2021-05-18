@@ -1,0 +1,38 @@
+<ng-container *ngIf="taskService.tasks$ | async as tasks; else selectList">
+  <mat-list class="list">
+    <mat-list-item *ngFor="let task of tasks" class="list-item">
+      <div petSwipe (swipeEnd)="processAction($event, task)" class="list-item-content">
+        <del *ngIf="task.status; else undone">{{task.text}}</del>
+        <ng-template #undone><span>{{task.text}}</span></ng-template>
+        <div class="list-item-actions">
+          <button class="list-item-action" mat-icon-button color="accent" (click)="toggleStatus(task)">
+            <mat-icon *ngIf="task.status">check_box</mat-icon>
+            <mat-icon *ngIf="!task.status">check_box_outline_blank</mat-icon>
+          </button>
+          <button class="list-item-action" mat-icon-button color="warn" (click)="remove(task)">
+            <mat-icon>block</mat-icon>
+          </button>
+        </div>
+      </div>
+      <div class="list-item-underlay">
+        <mat-icon class="icon-toggle">done</mat-icon>
+        <mat-icon class="icon-remove">block</mat-icon>
+      </div>
+    </mat-list-item>
+  </mat-list>
+  <div class="task-new">
+    <mat-form-field appearance="fill">
+      <mat-label><mat-icon>add_circle</mat-icon> new task</mat-label>
+      <input
+        matInput
+        [(ngModel)]="newTask"
+        (keyup.enter)="create()"
+        autocomplete="off"/>
+    </mat-form-field>
+  </div>
+  <button class="list-close" mat-raised-button [routerLink]="['/']">Close</button>
+  <button mat-raised-button color="warn" (click)="removeList()">Remove list</button>
+</ng-container>
+<ng-template #selectList>
+  <p>Please <a class="list-select" (click)="listService.toggleList()">select</a> or create new list</p>
+</ng-template>

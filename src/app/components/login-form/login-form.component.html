@@ -1,0 +1,17 @@
+<mat-drawer-container autosize class="main login-form-wrapper">
+  <form [formGroup]="form" class="login-form">
+    <div>
+      <mat-form-field appearance="fill">
+        <mat-label>email</mat-label>
+        <input matInput formControlName="email" />
+      </mat-form-field>
+    </div>
+    <div>
+      <mat-form-field appearance="fill">
+        <mat-label>password</mat-label>
+        <input matInput type="password" formControlName="password" />
+      </mat-form-field>
+    </div>
+    <button mat-raised-button color="primary" class="login-button" (click)="login()">Login</button>
+  </form>
+</mat-drawer-container>

@@ -1,0 +1,84 @@
+@import '../../../styles/variables';
+
+.list {
+  position: relative;
+  overflow: hidden;
+  margin: 0 -16px;
+
+  &-item {
+    position: relative;
+
+    &-actions {
+      display: flex;
+    }
+
+    &-action {
+      display: none;
+    }
+
+    &:hover &-action {
+      display: block;
+    }
+
+    &-content {
+      box-sizing: border-box;
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 100%;
+      padding: 0 16px;
+      z-index: 1;
+      display: flex;
+      width: 100%;
+      justify-content: space-between;
+      align-items: center;
+      background: $backgroundColor;
+
+      span, del {
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+      }
+    }
+
+    &-content.remove-ready + &-underlay,
+    &-content.toggle-ready + &-underlay {
+      box-sizing: border-box;
+      position: absolute;
+      display: flex;
+      align-items: center;
+      z-index: 0;
+      top: 0;
+      left: 0;
+      padding: 0 16px;
+      width: 100%;
+      height: 100%;
+    }
+
+    &-content.remove-ready + &-underlay {
+      background: $warnColor;
+      flex-direction: row-reverse;
+
+      .icon-toggle {
+        display: none;
+      }
+    }
+
+    &-content.toggle-ready + &-underlay {
+      background: $accentColor;
+
+      .icon-remove {
+        display: none;
+      }
+    }
+  }
+
+  &-select {
+    color: $accentColor;
+    cursor: pointer;
+  }
+
+  &-close {
+    margin-right: 20px;
+  }
+}

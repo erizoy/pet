@@ -1,0 +1,12 @@
+.login{
+  &-form-wrapper {
+    padding-top: 40px;
+    display: flex;
+    justify-content: space-around;
+  }
+
+  &-button {
+    height: 56px;
+    width: 100%;
+  }
+}
