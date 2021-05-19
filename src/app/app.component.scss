@@ -1,7 +1,10 @@
+@import './src/styles/variables';
+
 .header {
   display: flex;
   justify-content: space-between;
   padding: 10px;
+  background: $backgroundLightColor;
 
   &-title {
     display: flex;

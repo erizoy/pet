@@ -3,7 +3,9 @@
 .list {
   position: relative;
   overflow: hidden;
-  margin: 0 -16px;
+  padding: 0;
+  margin: 0 -20px 10px;
+  list-style: none;
 
   &-item {
     position: relative;
@@ -13,36 +15,31 @@
     }
 
     &-action {
-      display: none;
+      visibility: hidden;
     }
 
     &:hover &-action {
-      display: block;
+      visibility: visible;
+    }
+
+    &-task {
+      padding: 10px 20px;
     }
 
     &-content {
       box-sizing: border-box;
-      position: absolute;
+      position: relative;
       top: 0;
       left: 0;
-      height: 100%;
-      padding: 0 16px;
       z-index: 1;
       display: flex;
       width: 100%;
       justify-content: space-between;
       align-items: center;
       background: $backgroundColor;
-
-      span, del {
-        overflow: hidden;
-        white-space: nowrap;
-        text-overflow: ellipsis;
-      }
     }
 
-    &-content.remove-ready + &-underlay,
-    &-content.toggle-ready + &-underlay {
+    &-underlay {
       box-sizing: border-box;
       position: absolute;
       display: flex;
@@ -80,5 +77,11 @@
 
   &-close {
     margin-right: 20px;
+  }
+}
+
+@media (max-width: 768px) {
+  .list-item-actions {
+    display: none;
   }
 }

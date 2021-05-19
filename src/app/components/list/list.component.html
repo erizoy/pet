@@ -1,9 +1,11 @@
 <ng-container *ngIf="taskService.tasks$ | async as tasks; else selectList">
-  <mat-list class="list">
-    <mat-list-item *ngFor="let task of tasks" class="list-item">
+  <ul class="list">
+    <li *ngFor="let task of tasks" class="list-item">
       <div twoTodoSwipe (swipeEnd)="processAction($event, task)" class="list-item-content">
-        <del *ngIf="task.status; else undone">{{task.text}}</del>
-        <ng-template #undone><span>{{task.text}}</span></ng-template>
+        <div class="list-item-task">
+          <del *ngIf="task.status; else undone">{{task.text}}</del>
+          <ng-template #undone><span>{{task.text}}</span></ng-template>
+        </div>
         <div class="list-item-actions">
           <button class="list-item-action" mat-icon-button color="accent" (click)="toggleStatus(task)">
             <mat-icon *ngIf="task.status">check_box</mat-icon>
@@ -18,8 +20,8 @@
         <mat-icon class="icon-toggle">done</mat-icon>
         <mat-icon class="icon-remove">block</mat-icon>
       </div>
-    </mat-list-item>
-  </mat-list>
+    </li>
+  </ul>
   <div class="task-new">
     <mat-form-field appearance="fill">
       <mat-label><mat-icon>add_circle</mat-icon> new task</mat-label>

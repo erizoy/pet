@@ -12,6 +12,7 @@
         <input matInput type="password" formControlName="password" />
       </mat-form-field>
     </div>
+    <p *ngIf="form.getError('wrongPassword')" class="error">Invalid password</p>
     <button mat-raised-button color="primary" class="login-button" (click)="login()">Login</button>
   </form>
 </mat-drawer-container>

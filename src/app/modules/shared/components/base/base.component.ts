@@ -8,7 +8,7 @@ export class BaseComponent implements OnDestroy {
 
   public destroy$: ReplaySubject<null> = new ReplaySubject<null>(1);
 
-  constructor() { }
+  constructor() {}
 
   ngOnDestroy(): void {
     this.destroy$.next();
