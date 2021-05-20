@@ -1,0 +1,9 @@
+<mat-form-field appearance="fill">
+  <mat-label>new task</mat-label>
+  <mat-icon matSuffix>add_circle</mat-icon>
+  <input
+    matInput
+    [(ngModel)]="task"
+    (keyup.enter)="create()"
+    autocomplete="off"/>
+</mat-form-field>

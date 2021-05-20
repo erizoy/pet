@@ -1,4 +1,15 @@
 <ng-container *ngIf="taskService.tasks$ | async as tasks; else selectList">
+  <div class="list-buttons">
+    <button mat-icon-button (click)="toggleListForm()" [color]="listFormPanel.expanded ? 'primary' : null">
+      <mat-icon>settings</mat-icon>
+    </button>
+    <button mat-icon-button [routerLink]="['/']">
+      <mat-icon>close</mat-icon>
+    </button>
+  </div>
+  <mat-expansion-panel #listFormPanel>
+    <two-todo-list-form></two-todo-list-form>
+  </mat-expansion-panel>
   <ul class="list">
     <li *ngFor="let task of tasks" class="list-item">
       <div twoTodoSwipe (swipeEnd)="processAction($event, task)" class="list-item-content">
@@ -22,18 +33,7 @@
       </div>
     </li>
   </ul>
-  <div class="task-new">
-    <mat-form-field appearance="fill">
-      <mat-label><mat-icon>add_circle</mat-icon> new task</mat-label>
-      <input
-        matInput
-        [(ngModel)]="newTask"
-        (keyup.enter)="create()"
-        autocomplete="off"/>
-    </mat-form-field>
-  </div>
-  <button class="list-close" mat-raised-button [routerLink]="['/']">Close</button>
-  <button mat-raised-button color="warn" (click)="removeList()">Remove list</button>
+  <two-todo-task-form></two-todo-task-form>
 </ng-container>
 <ng-template #selectList>
   <p>Please <a class="list-select" (click)="listService.toggleList()">select</a> or create new list</p>

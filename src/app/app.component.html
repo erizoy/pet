@@ -11,7 +11,7 @@
       >
         <mat-icon>list</mat-icon>
       </button>
-      <ng-container *ngIf="listService.title$ | async as title">{{title}}</ng-container>
+      <ng-container *ngIf="listService.list$ | async as list">{{list.title}}</ng-container>
     </h1>
     <two-todo-user-menu></two-todo-user-menu>
   </header>

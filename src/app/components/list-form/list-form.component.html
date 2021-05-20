@@ -1,0 +1,29 @@
+<div *ngIf="!isGuest" class="list-form">
+  <div>
+    <mat-form-field appearance="fill">
+      <mat-label>title</mat-label>
+      <mat-icon matSuffix>title</mat-icon>
+      <input
+        matInput
+        [(ngModel)]="title"
+        (keyup.enter)="update({title: title})"
+        (blur)="update({title: title})"
+        autocomplete="off"/>
+    </mat-form-field>
+  </div>
+  <div>
+    <mat-form-field appearance="fill">
+      <mat-label>guest</mat-label>
+      <mat-icon matSuffix>guest</mat-icon>
+      <input
+        matInput
+        [(ngModel)]="guest"
+        (keyup.enter)="update({guest: guest})"
+        (blur)="update({guest: guest})"
+        autocomplete="off"/>
+    </mat-form-field>
+  </div>
+</div>
+<button mat-raised-button class="list-remove" (click)="remove()" color="warn">
+  Remove <ng-container *ngIf="isGuest">from shared</ng-container>
+</button>

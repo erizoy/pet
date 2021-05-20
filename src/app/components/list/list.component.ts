@@ -1,11 +1,12 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { ListService } from '../../modules/shared/services/list/list.service';
 import { TaskService } from '../../modules/shared/services/task/task.service';
 import { takeUntil } from 'rxjs/operators';
 import { BaseComponent } from '../../modules/shared/components/base/base.component';
 import { SwipeEvent } from '../../models/swipe-event';
 import { ListTask } from '../../models/list';
+import { MatExpansionPanel } from '@angular/material/expansion';
 
 @Component({
   selector: 'two-todo-list',
@@ -13,12 +14,9 @@ import { ListTask } from '../../models/list';
   styleUrls: ['./list.component.scss']
 })
 export class ListComponent extends BaseComponent implements OnInit {
-
-  uuid!: string;
-  newTask = '';
+  @ViewChild('listFormPanel') listFormPanel!: MatExpansionPanel;
 
   constructor(
-    private router: Router,
     private route: ActivatedRoute,
     public listService: ListService,
     public taskService: TaskService
@@ -30,9 +28,9 @@ export class ListComponent extends BaseComponent implements OnInit {
     this.route.paramMap
       .pipe(takeUntil(this.destroy$))
       .subscribe(params => {
-        this.uuid = params.get('uuid') as string;
-        this.taskService.load(this.uuid);
-        this.listService.setTitle(this.uuid);
+        const uuid = params.get('uuid') as string;
+        this.taskService.load(uuid);
+        this.listService.setList(uuid);
       });
   }
 
@@ -41,16 +39,7 @@ export class ListComponent extends BaseComponent implements OnInit {
   }
 
   removeList(): void {
-    this.listService.remove(this.uuid).then(() => {
-      this.router.navigate(['/']);
-    });
-  }
-
-  create(): void {
-    if (this.newTask.length > 0) {
-      this.taskService.create(this.newTask);
-      this.newTask = '';
-    }
+    this.listService.remove();
   }
 
   remove(task: ListTask): void {
@@ -59,6 +48,10 @@ export class ListComponent extends BaseComponent implements OnInit {
 
   toggleStatus(task: ListTask): void {
     this.taskService.toggleStatus(task);
+  }
+
+  toggleListForm(): void {
+    this.listFormPanel.toggle();
   }
 
   processAction(event: SwipeEvent, task: ListTask): void {

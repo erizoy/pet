@@ -18,7 +18,7 @@ export class TaskService {
   load(listUuid: string | null): void {
     if (listUuid) {
       this.#listUuid = listUuid;
-      this.#tasks = this.db.list<ListTask>(`lists/tasks/${listUuid}`, (ref) => ref.orderByChild('status'));
+      this.#tasks = this.db.list<ListTask>(`lists/${listUuid}/tasks`, (ref) => ref.orderByChild('status'));
       this.tasks$ = this.#tasks.valueChanges([], { idField: 'uuid'});
     } else {
       this.#listUuid = this.#tasks = this.tasks$ = undefined;
@@ -33,11 +33,11 @@ export class TaskService {
   }
 
   remove(task: ListTask): void {
-    this.db.object<ListTask>(`lists/tasks/${this.#listUuid}/${task.uuid}`).remove();
+    this.db.object<ListTask>(`lists/${this.#listUuid}/tasks/${task.uuid}`).remove();
   }
 
   toggleStatus(task: ListTask): void {
-    this.db.object<ListTask>(`lists/tasks/${this.#listUuid}/${task.uuid}`).set({
+    this.db.object<ListTask>(`lists/${this.#listUuid}/tasks/${task.uuid}`).set({
       text: task.text,
       status: !task.status
     } as ListTask);

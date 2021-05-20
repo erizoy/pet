@@ -22,3 +22,11 @@ body {
 .error {
   color: $warnColor;
 }
+
+mat-label > mat-icon {
+  vertical-align: middle !important;
+}
+
+.mat-raised-button + .mat-raised-button {
+  margin-left: 20px;
+}

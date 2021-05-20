@@ -19,6 +19,10 @@ import { LoginFormComponent } from './components/login-form/login-form.component
 import { MatInputModule } from '@angular/material/input';
 import { MainComponent } from './components/main/main.component';
 import { MatIconModule } from '@angular/material/icon';
+import { TaskFormComponent } from './components/task-form/task-form.component';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatExpansionModule } from '@angular/material/expansion';
+import { ListFormComponent } from './components/list-form/list-form.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +31,9 @@ import { MatIconModule } from '@angular/material/icon';
     ListsComponent,
     ListComponent,
     LoginFormComponent,
-    MainComponent
+    MainComponent,
+    TaskFormComponent,
+    ListFormComponent
   ],
   imports: [
     BrowserModule,
@@ -42,7 +48,9 @@ import { MatIconModule } from '@angular/material/icon';
     MatIconModule,
     MatMenuModule,
     MatListModule,
-    MatInputModule
+    MatInputModule,
+    MatDialogModule,
+    MatExpansionModule
   ],
   providers: [],
   bootstrap: [AppComponent]
