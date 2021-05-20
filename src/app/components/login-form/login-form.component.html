@@ -2,17 +2,21 @@
   <form [formGroup]="form" class="login-form">
     <div>
       <mat-form-field appearance="fill">
-        <mat-label>email</mat-label>
+        <mat-label>{{ 'LOGIN_FORM.EMAIL' | translate }}</mat-label>
         <input matInput formControlName="email" />
       </mat-form-field>
     </div>
     <div>
       <mat-form-field appearance="fill">
-        <mat-label>password</mat-label>
+        <mat-label>{{ 'LOGIN_FORM.PASSWORD' | translate }}</mat-label>
         <input matInput type="password" formControlName="password" />
       </mat-form-field>
     </div>
-    <p *ngIf="form.getError('wrongPassword')" class="error">Invalid password</p>
-    <button mat-raised-button color="primary" class="login-button" (click)="login()">Login</button>
+    <p *ngIf="form.getError('wrongPassword')" class="error">
+      {{ 'LOGIN_FORM.ERRORS.INVALID_PASSWORD' | translate }}
+    </p>
+    <button mat-raised-button color="primary" class="login-button" (click)="login()">
+      {{ 'LOGIN_FORM.BUTTON' | translate }}
+    </button>
   </form>
 </mat-drawer-container>

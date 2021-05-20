@@ -15,6 +15,9 @@ import { MatListModule } from '@angular/material/list';
 import { ListComponent } from './components/list/list.component';
 import { SharedModule } from './modules/shared/shared.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { LoginFormComponent } from './components/login-form/login-form.component';
 import { MatInputModule } from '@angular/material/input';
 import { MainComponent } from './components/main/main.component';
@@ -23,6 +26,10 @@ import { TaskFormComponent } from './components/task-form/task-form.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { ListFormComponent } from './components/list-form/list-form.component';
+
+export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
+  return new TranslateHttpLoader(http, './assets/i18n/', '.json');
+}
 
 @NgModule({
   declarations: [
@@ -43,6 +50,14 @@ import { ListFormComponent } from './components/list-form/list-form.component';
     SharedModule,
     AngularFireModule.initializeApp(environment.firebase),
     NoopAnimationsModule,
+    HttpClientModule,
+    TranslateModule.forRoot({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: (createTranslateLoader),
+        deps: [HttpClient]
+      }
+    }),
     MatSidenavModule,
     MatButtonModule,
     MatIconModule,

@@ -1,7 +1,7 @@
 <div *ngIf="!isGuest" class="list-form">
   <div>
     <mat-form-field appearance="fill">
-      <mat-label>title</mat-label>
+      <mat-label>{{ 'LIST_FORM.TITLE' | translate }}</mat-label>
       <mat-icon matSuffix>title</mat-icon>
       <input
         matInput
@@ -13,8 +13,8 @@
   </div>
   <div>
     <mat-form-field appearance="fill">
-      <mat-label>guest</mat-label>
-      <mat-icon matSuffix>guest</mat-icon>
+      <mat-label>{{ 'LIST_FORM.GUEST' | translate }}</mat-label>
+      <mat-icon matSuffix>person_add</mat-icon>
       <input
         matInput
         [(ngModel)]="guest"
@@ -25,5 +25,6 @@
   </div>
 </div>
 <button mat-raised-button class="list-remove" (click)="remove()" color="warn">
-  Remove <ng-container *ngIf="isGuest">from shared</ng-container>
+  {{ 'LIST_FORM.REMOVE' | translate }}
+  <ng-container *ngIf="isGuest">{{ 'LIST_FORM.FROM_SHARED' | translate }}</ng-container>
 </button>

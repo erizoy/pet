@@ -22,7 +22,6 @@ export class MainComponent extends BaseComponent implements OnInit, AfterViewIni
         this.drawer.opened = true;
       } else {
         this.drawer.mode = 'over';
-        this.drawer.opened = false;
       }
     }
   }

@@ -1,0 +1,35 @@
+{
+  "NEW_TASK": "new task",
+  "MENU": "User menu",
+  "LOGIN": "Login",
+  "LOGOUT": "Logout",
+  "LISTS": {
+    "NEW_LIST": "new list",
+    "SHARED": "Shared lists"
+  },
+  "LIST": {
+    "PLEASE": "Please",
+    "SELECT": "select",
+    "OR_CREATE": "or create new list"
+  },
+  "LIST_FORM": {
+    "TITLE": "title",
+    "GUEST": "guest",
+    "REMOVE": "Remove",
+    "FROM_SHARED": "from shared"
+  },
+  "LOGIN_FORM": {
+    "EMAIL": "email",
+    "PASSWORD": "password",
+    "ERRORS": {
+      "INVALID_PASSWORD": "Invalid password"
+    },
+    "BUTTON": "Login"
+  },
+  "INFO_MODAL": {
+    "TITLE": "Error occurred",
+    "TEXT": "Server responded with {{code}} error. Reload page or go back later.",
+    "CLOSE": "Close",
+    "RELOAD": "Reload"
+  }
+}

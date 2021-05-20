@@ -24,6 +24,8 @@ export class ListsComponent {
         this.listService.toggleList();
       }
     });
+
+    return;
   }
 
   create(): void {

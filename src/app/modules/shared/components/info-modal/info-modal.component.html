@@ -1,4 +1,8 @@
-<h2>Error occurred</h2>
-<p>Server responded with {{data.error.code}} error. Reload page or go back later.</p>
-<button mat-raised-button (click)="close()">close</button>
-<button mat-raised-button color="primary" (click)="reload()">Reload</button>
+<h2>{{ 'INFO_MODAL.TITLE' | translate }}</h2>
+<p>{{ 'INFO_MODAL.TEXT' | translate:{code:data.error.code} }}</p>
+<button mat-raised-button (click)="close()">
+  {{ 'INFO_MODAL.CLOSE' | translate }}
+</button>
+<button mat-raised-button color="primary" (click)="reload()">
+  {{ 'INFO_MODAL.RELOAD' | translate }}
+</button>

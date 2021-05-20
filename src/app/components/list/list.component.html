@@ -8,25 +8,25 @@
     </button>
   </div>
   <mat-expansion-panel #listFormPanel>
-    <two-todo-list-form></two-todo-list-form>
+    <two-todo-list-form [panel]="listFormPanel"></two-todo-list-form>
   </mat-expansion-panel>
   <ul class="list">
     <li *ngFor="let task of tasks" class="list-item">
-      <div twoTodoSwipe (swipeEnd)="processAction($event, task)" class="list-item-content">
+      <a twoTodoSwipe (swipeEnd)="processAction($event, task)" class="list-item-content" tabindex="0">
         <div class="list-item-task">
           <del *ngIf="task.status; else undone">{{task.text}}</del>
           <ng-template #undone><span>{{task.text}}</span></ng-template>
         </div>
         <div class="list-item-actions">
-          <button class="list-item-action" mat-icon-button color="accent" (click)="toggleStatus(task)">
+          <button class="list-item-action" mat-icon-button color="accent" (click)="toggleStatus(task)" tabindex="0">
             <mat-icon *ngIf="task.status">check_box</mat-icon>
             <mat-icon *ngIf="!task.status">check_box_outline_blank</mat-icon>
           </button>
-          <button class="list-item-action" mat-icon-button color="warn" (click)="remove(task)">
+          <button class="list-item-action" mat-icon-button color="warn" (click)="remove(task)" tabindex="0">
             <mat-icon>block</mat-icon>
           </button>
         </div>
-      </div>
+      </a>
       <div class="list-item-underlay">
         <mat-icon class="icon-toggle">done</mat-icon>
         <mat-icon class="icon-remove">block</mat-icon>
@@ -36,5 +36,13 @@
   <two-todo-task-form></two-todo-task-form>
 </ng-container>
 <ng-template #selectList>
-  <p>Please <a class="list-select" (click)="listService.toggleList()">select</a> or create new list</p>
+  <p style="font-size: 24px;">{{ 'LIST.PLEASE' | translate }}
+    <ng-container *ngIf="listService.listStatus$ | async; else toggle">
+      {{ 'LIST.SELECT' | translate }}
+    </ng-container>
+    <ng-template #toggle>
+      <a class="list-select" (click)="listService.toggleList()">{{ 'LIST.SELECT' | translate }}</a>
+    </ng-template>
+    {{ 'LIST.OR_CREATE' | translate }}
+  </p>
 </ng-template>

@@ -5,6 +5,7 @@ import { SwipeDirective } from './directives/swipe.directive';
 import { InfoModalComponent } from './components/info-modal/info-modal.component';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialogModule } from '@angular/material/dialog';
+import { TranslateModule } from '@ngx-translate/core';
 
 @NgModule({
   declarations: [
@@ -14,6 +15,7 @@ import { MatDialogModule } from '@angular/material/dialog';
   ],
   imports: [
     CommonModule,
+    TranslateModule,
     MatButtonModule,
     MatDialogModule
   ],

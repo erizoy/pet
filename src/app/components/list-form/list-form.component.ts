@@ -1,9 +1,10 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { Router } from '@angular/router';
+import { MatExpansionPanel } from '@angular/material/expansion';
+import { takeUntil } from 'rxjs/operators';
 import { ListService } from '../../modules/shared/services/list/list.service';
 import { List } from '../../models/list';
 import { BaseComponent } from '../../modules/shared/components/base/base.component';
-import { takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'two-todo-list-form',
@@ -11,6 +12,7 @@ import { takeUntil } from 'rxjs/operators';
   styleUrls: ['./list-form.component.scss']
 })
 export class ListFormComponent extends BaseComponent {
+  @Input() panel!: MatExpansionPanel;
   #list?: List | null;
   title?: string;
   guest?: string;
