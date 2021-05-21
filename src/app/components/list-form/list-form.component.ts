@@ -12,7 +12,7 @@ import { BaseComponent } from '../../modules/shared/components/base/base.compone
   styleUrls: ['./list-form.component.scss']
 })
 export class ListFormComponent extends BaseComponent {
-  @Input() panel!: MatExpansionPanel;
+  @Input() panel!: MatExpansionPanel; // parent element reference
   #list?: List | null;
   title?: string;
   guest?: string;

@@ -15,7 +15,7 @@ export class MainComponent extends BaseComponent implements OnInit, AfterViewIni
 
   @ViewChild('drawer') drawer!: MatDrawer;
   @HostListener('window:resize', ['$event'])
-  onResize(): void {
+  onResize(): void { // toggles sidebar mode when window width crosses mobile endpoint
     if (this.drawer) {
       if (window.innerWidth > this.config.mobileEndpoint) {
         this.drawer.mode = 'side';
@@ -35,7 +35,7 @@ export class MainComponent extends BaseComponent implements OnInit, AfterViewIni
   }
 
   ngOnInit(): void {
-    this.listService.listStatus$
+    this.listService.listStatus$ // Listens changing and toggles sidebar
       .pipe(takeUntil(this.destroy$))
       .subscribe(_ => {
         if (this.drawer) {

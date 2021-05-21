@@ -7,14 +7,18 @@ import { AngularFireDatabase } from '@angular/fire/database';
   providedIn: 'root'
 })
 export class TaskService {
-  #listUuid?: string;
-  #tasks?: any;
-  tasks$?: Observable<ListTask[]>;
+  #listUuid?: string; // Selected list uuid
+  #tasks?: any; // Reference to firebase rtdb list of list's tasks
+  tasks$?: Observable<ListTask[]>; // Observable for list's tasks
 
   constructor(
     private db: AngularFireDatabase
   ) { }
 
+  /**
+   * Set current list uid, tasks reference and observable
+   * @param listUuid - list uuid from current route
+   */
   load(listUuid: string | null): void {
     if (listUuid) {
       this.#listUuid = listUuid;
@@ -25,6 +29,10 @@ export class TaskService {
     }
   }
 
+  /**
+   * Creates new element in current list's tasks
+   * @param text - text description of new task
+   */
   create(text: string): void {
     this.#tasks.push({
       text,
@@ -32,10 +40,18 @@ export class TaskService {
     });
   }
 
+  /**
+   * Removes selected task
+   * @param task - selected task
+   */
   remove(task: ListTask): void {
     this.db.object<ListTask>(`lists/${this.#listUuid}/tasks/${task.uuid}`).remove();
   }
 
+  /**
+   * Toggles status of selected task
+   * @param task - selected task
+   */
   toggleStatus(task: ListTask): void {
     this.db.object<ListTask>(`lists/${this.#listUuid}/tasks/${task.uuid}`).set({
       text: task.text,

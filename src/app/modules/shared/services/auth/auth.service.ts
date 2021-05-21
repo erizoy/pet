@@ -11,8 +11,7 @@ export class AuthService {
 
   constructor(
     private angularFireAuth: AngularFireAuth
-  ) {
-  }
+  ) {}
 
   get user$(): Observable<firebase.User | null> {
     return this.angularFireAuth.user;
