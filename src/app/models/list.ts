@@ -4,6 +4,8 @@ export interface ListTask {
   uuid: string;
   /** Text description */
   text: string;
+  /** Element position in list */
+  position: number;
   /** Status where true means done */
   status: boolean;
 }

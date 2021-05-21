@@ -7,13 +7,12 @@ import { AuthService } from '../auth/auth.service';
 import { Router } from '@angular/router';
 import { AngularFireList } from '@angular/fire/database/interfaces';
 import { MatDialog } from '@angular/material/dialog';
-import { MatDialogRef } from '@angular/material/dialog/dialog-ref';
-import { InfoModalComponent } from '../../components/info-modal/info-modal.component';
+import { BaseService } from '../base-service/base.service';
 
 @Injectable({
   providedIn: 'root'
 })
-export class ListService {
+export class ListService extends BaseService {
   #uid?: string; // Authenticated user id
   #email?: string; // Authenticated user email
   #listUuid?: string; // Selected list uuid
@@ -28,14 +27,13 @@ export class ListService {
   foreignLists$?: Observable<List[]>; // Observable for all lists, where user is guest
   listStatus$ = new BehaviorSubject<boolean>(true); // Opened|Closed status of lists in sidebar
 
-  #errorModal?: MatDialogRef<InfoModalComponent>; // Reference to opened error modal
-
   constructor(
     private router: Router,
     private db: AngularFireDatabase,
     private auth: AuthService,
-    private dialog: MatDialog
+    protected dialog: MatDialog
   ) {
+    super(dialog);
     // Subscription on current authenticated user. Emits when on first load or after user's login.
     this.auth.user$.subscribe(user => {
       if (user && user.uid) {
@@ -66,27 +64,6 @@ export class ListService {
       this.#list = this.#listUuid = undefined;
       this.list$.next(null);
     }
-  }
-
-  /**
-   * Handler opens modal with error code when rtdb reference throws error
-   * @param error - object from failed rtdb reference
-   * @param caught - server response
-   * @return Observable of caught
-   */
-  private errorHandler<T>(error: any, caught: Observable<T>): Observable<T> {
-    if (!this.#errorModal) {
-      this.#errorModal = this.dialog.open(InfoModalComponent, {
-        width: '340px',
-        data: { error }
-      });
-    }
-
-    this.#errorModal.afterClosed().subscribe(_ => {
-      this.#errorModal = undefined;
-    });
-
-    return caught;
   }
 
   /**

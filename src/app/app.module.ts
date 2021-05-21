@@ -9,22 +9,23 @@ import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatButtonModule } from '@angular/material/button';
 import { MatMenuModule } from '@angular/material/menu';
-import { UserMenuComponent } from './components/user-menu/user-menu.component';
-import { ListsComponent } from './components/lists/lists.component';
-import { MatListModule } from '@angular/material/list';
-import { ListComponent } from './components/list/list.component';
-import { SharedModule } from './modules/shared/shared.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
-import { LoginFormComponent } from './components/login-form/login-form.component';
+import { SharedModule } from './modules/shared/shared.module';
+import { DragDropModule } from '@angular/cdk/drag-drop';
 import { MatInputModule } from '@angular/material/input';
-import { MainComponent } from './components/main/main.component';
 import { MatIconModule } from '@angular/material/icon';
+import { MainComponent } from './components/main/main.component';
 import { TaskFormComponent } from './components/task-form/task-form.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatExpansionModule } from '@angular/material/expansion';
+import { UserMenuComponent } from './components/user-menu/user-menu.component';
+import { ListsComponent } from './components/lists/lists.component';
+import { MatListModule } from '@angular/material/list';
+import { ListComponent } from './components/list/list.component';
+import { LoginFormComponent } from './components/login-form/login-form.component';
 import { ListFormComponent } from './components/list-form/list-form.component';
 
 export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
@@ -58,6 +59,7 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
         deps: [HttpClient]
       }
     }),
+    DragDropModule,
     MatSidenavModule,
     MatButtonModule,
     MatIconModule,

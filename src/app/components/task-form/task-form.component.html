@@ -2,6 +2,7 @@
   <mat-label>{{ 'NEW_TASK' | translate }}</mat-label>
   <mat-icon matSuffix>add_circle</mat-icon>
   <input
+    #taskInput
     matInput
     [(ngModel)]="task"
     (keyup.enter)="create()"

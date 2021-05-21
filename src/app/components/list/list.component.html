@@ -10,15 +10,16 @@
   <mat-expansion-panel #listFormPanel>
     <two-todo-list-form [panel]="listFormPanel"></two-todo-list-form>
   </mat-expansion-panel>
-  <ul class="list">
-    <li *ngFor="let task of tasks" class="list-item">
-      <a twoTodoSwipe (swipeEnd)="processAction($event, task)" class="list-item-content" tabindex="0">
+  <ul cdkDropList class="list" (cdkDropListDropped)="drop($event.previousIndex, $event.currentIndex, tasks)">
+    <li *ngFor="let task of tasks" class="list-item" cdkDrag>
+      <a twoTodoSwipe (swipeEnd)="processAction($event, task, tasks)" class="list-item-content" tabindex="0">
+        <div class="list-item-drag" [class.done]="task.status" cdkDragHandle></div>
         <div class="list-item-task">
           <del *ngIf="task.status; else undone">{{task.text}}</del>
           <ng-template #undone><span>{{task.text}}</span></ng-template>
         </div>
         <div class="list-item-actions">
-          <button class="list-item-action" mat-icon-button color="accent" (click)="toggleStatus(task)" tabindex="0">
+          <button class="list-item-action" mat-icon-button color="accent" (click)="toggleStatus(task, tasks)" tabindex="0">
             <mat-icon *ngIf="task.status">check_box</mat-icon>
             <mat-icon *ngIf="!task.status">check_box_outline_blank</mat-icon>
           </button>
@@ -33,7 +34,7 @@
       </div>
     </li>
   </ul>
-  <two-todo-task-form></two-todo-task-form>
+  <two-todo-task-form [position]="tasks.length"></two-todo-task-form>
 </ng-container>
 <ng-template #selectList>
   <p style="font-size: 24px;">{{ 'LIST.PLEASE' | translate }}
