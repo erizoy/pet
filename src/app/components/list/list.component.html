@@ -38,11 +38,11 @@
 </ng-container>
 <ng-template #selectList>
   <p style="font-size: 24px;">{{ 'LIST.PLEASE' | translate }}
-    <ng-container *ngIf="listService.listStatus$ | async; else toggle">
+    <ng-container *ngIf="sidebarService.drawer?.opened; else toggle">
       {{ 'LIST.SELECT' | translate }}
     </ng-container>
     <ng-template #toggle>
-      <a class="list-select" (click)="listService.toggleList()">{{ 'LIST.SELECT' | translate }}</a>
+      <a class="list-select" (click)="sidebarService.drawer.open()">{{ 'LIST.SELECT' | translate }}</a>
     </ng-template>
     {{ 'LIST.OR_CREATE' | translate }}
   </p>

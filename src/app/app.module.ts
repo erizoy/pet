@@ -27,6 +27,7 @@ import { MatListModule } from '@angular/material/list';
 import { ListComponent } from './components/list/list.component';
 import { LoginFormComponent } from './components/login-form/login-form.component';
 import { ListFormComponent } from './components/list-form/list-form.component';
+import { APP_CONFIG, TWO_TODO_CONFIG } from './models/app-config';
 
 export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -69,7 +70,10 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
     MatDialogModule,
     MatExpansionModule
   ],
-  providers: [],
+  providers: [{
+    provide: APP_CONFIG,
+    useValue: TWO_TODO_CONFIG
+  }],
   bootstrap: [AppComponent]
 })
 export class AppModule {

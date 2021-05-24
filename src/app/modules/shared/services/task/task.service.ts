@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { ListTask } from '../../../../models/list';
 import { AngularFireDatabase } from '@angular/fire/database';
-import { BaseService } from '../base-service/base.service';
+import { BaseService } from '../base/base.service';
 import { MatDialog } from '@angular/material/dialog';
 import { catchError } from 'rxjs/operators';
 
@@ -29,7 +29,7 @@ export class TaskService extends BaseService {
     if (listUuid) {
       this.#listUuid = listUuid;
       this.#tasks = this.db.list<ListTask>(`lists/${listUuid}/tasks`, (ref) => ref.orderByChild('position'));
-      this.tasks$ = this.#tasks.valueChanges([], { idField: 'uuid'}).pipe(catchError(this.errorHandler));
+      this.tasks$ = this.#tasks.valueChanges([], { idField: 'uuid'}).pipe(catchError(this.errorHandler.bind(this)));
     } else {
       this.#listUuid = this.#tasks = this.tasks$ = undefined;
     }

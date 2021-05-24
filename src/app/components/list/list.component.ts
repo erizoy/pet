@@ -5,6 +5,7 @@ import { moveItemInArray } from '@angular/cdk/drag-drop';
 import { takeUntil } from 'rxjs/operators';
 import { ListService } from '../../modules/shared/services/list/list.service';
 import { TaskService } from '../../modules/shared/services/task/task.service';
+import { SidebarService } from '../../modules/shared/services/sidebar/sidebar.service';
 import { BaseComponent } from '../../modules/shared/components/base/base.component';
 import { SwipeEvent } from '../../models/swipe-event';
 import { ListTask } from '../../models/list';
@@ -21,7 +22,8 @@ export class ListComponent extends BaseComponent implements OnInit {
     private ngZone: NgZone,
     private route: ActivatedRoute,
     public listService: ListService,
-    public taskService: TaskService
+    public taskService: TaskService,
+    public sidebarService: SidebarService
   ) {
     super();
   }

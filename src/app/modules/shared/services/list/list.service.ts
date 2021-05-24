@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Inject, Injectable } from '@angular/core';
 import { AngularFireDatabase, AngularFireObject } from '@angular/fire/database';
 import { BehaviorSubject, Observable, Subscription } from 'rxjs';
 import { List } from '../../../../models/list';
@@ -7,7 +7,7 @@ import { AuthService } from '../auth/auth.service';
 import { Router } from '@angular/router';
 import { AngularFireList } from '@angular/fire/database/interfaces';
 import { MatDialog } from '@angular/material/dialog';
-import { BaseService } from '../base-service/base.service';
+import { BaseService } from '../base/base.service';
 
 @Injectable({
   providedIn: 'root'
@@ -25,7 +25,6 @@ export class ListService extends BaseService {
   // Add-hoc: If not define as ANY ref = permission denied error
   #foreignLists?: AngularFireList<List> = this.db.list<List>(`lists`); // Reference to firebase rtdb lists where user is not owner
   foreignLists$?: Observable<List[]>; // Observable for all lists, where user is guest
-  listStatus$ = new BehaviorSubject<boolean>(true); // Opened|Closed status of lists in sidebar
 
   constructor(
     private router: Router,
@@ -40,9 +39,9 @@ export class ListService extends BaseService {
         this.#uid = user.uid;
         this.#email = user.email as string;
         this.#lists = this.db.list<List>(`lists`, ref => ref.orderByChild('userId').equalTo(user.uid));
-        this.lists$ = this.#lists.valueChanges([], {idField: 'uuid'}).pipe(catchError(this.errorHandler));
+        this.lists$ = this.#lists.valueChanges([], {idField: 'uuid'}).pipe(catchError(this.errorHandler.bind(this)));
         this.#foreignLists = this.db.list<List>(`lists`, ref => ref.orderByChild('guest').equalTo(user.email));
-        this.foreignLists$ = this.#foreignLists.valueChanges([], {idField: 'uuid'}).pipe(catchError(this.errorHandler));
+        this.foreignLists$ = this.#foreignLists.valueChanges([], {idField: 'uuid'}).pipe(catchError(this.errorHandler.bind(this)));
       } else {
         this.#lists = this.lists$ = this.#uid = this.#email = undefined;
       }
@@ -57,21 +56,13 @@ export class ListService extends BaseService {
     if (listUuid) {
       this.#listUuid = listUuid;
       this.#list = this.db.object<List>(`lists/${listUuid}`);
-      this.#list$ = this.#list.valueChanges().pipe(catchError(this.errorHandler))
+      this.#list$ = this.#list.valueChanges().pipe(catchError(this.errorHandler.bind(this)))
         .subscribe(list => this.list$.next(list && this.#email ? new List(list, this.#email) : null));
     } else {
       this.#list$?.unsubscribe();
       this.#list = this.#listUuid = undefined;
       this.list$.next(null);
     }
-  }
-
-  /**
-   * Toggle state of lists in sidebar
-   */
-  toggleList(): void {
-    const current = this.listStatus$.getValue();
-    this.listStatus$.next(!current);
   }
 
   /**

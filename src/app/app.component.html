@@ -3,7 +3,7 @@
     <h1
       *ngIf="auth.user$ | async"
       class="header-title"
-      (click)="listService.toggleList()">
+      (click)="sidebarService.drawer.open()">
       <button
         mat-icon-button
         color="primary"

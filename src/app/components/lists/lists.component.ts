@@ -1,13 +1,13 @@
 import { Component, Inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { ListService } from '../../modules/shared/services/list/list.service';
-import { APP_CONFIG, AppConfig, TWO_TODO_CONFIG } from '../../models/app-config';
+import { SidebarService } from '../../modules/shared/services/sidebar/sidebar.service';
+import { APP_CONFIG, AppConfig } from '../../models/app-config';
 
 @Component({
   selector: 'two-todo-lists',
   templateUrl: './lists.component.html',
-  styleUrls: ['./lists.component.scss'],
-  providers: [{provide: APP_CONFIG, useValue: TWO_TODO_CONFIG}]
+  styleUrls: ['./lists.component.scss']
 })
 export class ListsComponent {
   newList = '';
@@ -15,13 +15,14 @@ export class ListsComponent {
   constructor(
     @Inject(APP_CONFIG) private config: AppConfig,
     private router: Router,
-    public listService: ListService
+    public listService: ListService,
+    private sidebarService: SidebarService
   ) {}
 
   openList(uuid: string): void {
     this.router.navigate([`/${uuid}`]).then(() => {
       if (window.innerWidth <= this.config.mobileEndpoint) {
-        this.listService.toggleList();
+        this.sidebarService.drawer.close();
       }
     });
 
@@ -34,7 +35,7 @@ export class ListsComponent {
 
       this.router.navigate([`/${uuid}`]).then(() => {
         if (window.innerWidth <= this.config.mobileEndpoint) {
-          this.listService.toggleList();
+          this.sidebarService.drawer.close();
         }
         this.newList = '';
       });
