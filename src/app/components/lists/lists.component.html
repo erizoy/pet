@@ -11,6 +11,7 @@
         tabindex="0"
         [(ngModel)]="newList"
         (keyup.enter)="create()"
+        (blur)="create()"
         autocomplete="off"/>
     </mat-form-field>
   </div>

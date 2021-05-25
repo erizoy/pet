@@ -1,4 +1,5 @@
-import { Component, NgZone, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, Inject, NgZone, OnInit, QueryList, ViewChild, ViewChildren } from '@angular/core';
+import { DOCUMENT } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
 import { MatExpansionPanel } from '@angular/material/expansion';
 import { moveItemInArray } from '@angular/cdk/drag-drop';
@@ -17,13 +18,16 @@ import { ListTask } from '../../models/list';
 })
 export class ListComponent extends BaseComponent implements OnInit {
   @ViewChild('listFormPanel') listFormPanel!: MatExpansionPanel;
+  @ViewChildren('listTask') listTasks!: QueryList<ElementRef>;
+  #selectedListTask: HTMLSpanElement | null = null;
 
   constructor(
     private ngZone: NgZone,
     private route: ActivatedRoute,
     public listService: ListService,
     public taskService: TaskService,
-    public sidebarService: SidebarService
+    public sidebarService: SidebarService,
+    @Inject(DOCUMENT) private document: Document
   ) {
     super();
   }
@@ -45,6 +49,40 @@ export class ListComponent extends BaseComponent implements OnInit {
 
   remove(task: ListTask): void {
     this.taskService.remove(task);
+  }
+
+  edit(task: ListTask, event?: any): void {
+    if (!event || event && /\n/g.test(event.data)) {
+      if (this.#selectedListTask) {
+        this.#selectedListTask.removeAttribute('contenteditable');
+        this.#selectedListTask.blur();
+        const text = this.#selectedListTask.innerText.replace(/\n|&nbsp;/g, '').trim();
+        this.#selectedListTask.innerHTML = text;
+        console.log(text);
+
+        this.taskService.update(task.uuid, {text});
+      }
+
+      return;
+    }
+  }
+
+  toggleEdit(index: number): void {
+    const spanRef = this.listTasks.get(index);
+    this.#selectedListTask = spanRef ? spanRef.nativeElement : null;
+
+    if (this.#selectedListTask) {
+      this.#selectedListTask.contentEditable = 'true';
+      this.#selectedListTask.focus();
+
+      const range = this.document.createRange();
+      const sel = window.getSelection();
+
+      range.selectNodeContents(this.#selectedListTask);
+      range.collapse(false);
+      sel?.removeAllRanges();
+      sel?.addRange(range);
+    }
   }
 
   toggleStatus(task: ListTask, tasks: ListTask[]): void {

@@ -17,6 +17,7 @@ export class MainComponent implements AfterViewInit {
         this.drawer.mode = 'side';
         this.drawer.opened = true;
       } else {
+        this.drawer.opened = false;
         this.drawer.mode = 'over';
       }
     }

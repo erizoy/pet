@@ -6,5 +6,6 @@
     matInput
     [(ngModel)]="task"
     (keyup.enter)="create()"
+    (blur)="create()"
     autocomplete="off"/>
 </mat-form-field>

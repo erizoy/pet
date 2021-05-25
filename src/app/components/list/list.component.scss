@@ -44,12 +44,46 @@
       display: flex;
     }
 
-    &-action {
+    &-action,
+    &-edit {
       visibility: hidden;
+    }
+
+    &-edit {
+      height: 20px;
+      width: 20px;
+      line-height: 20px;
+      font-size: 14px;
+      margin-left: 4px;
+    }
+
+    &-edit .mat-icon {
+      height: 20px;
+      width: 20px;
+      line-height: 20px;
     }
 
     &-task {
       padding: 10px 20px;
+
+      p[contenteditable] {
+        display: block;
+        outline: none;
+        background: $backgroundColor;
+
+        & + button {
+          display: none;
+        }
+      }
+    }
+
+    &-text {
+      margin: 0;
+      display: inline;
+
+      &.done {
+        text-decoration: line-through;
+      }
     }
 
     &-content {
@@ -115,7 +149,8 @@
         background: $backgroundLightColor;
 
         .list-item-drag,
-        .list-item-action {
+        .list-item-action,
+        .list-item-edit {
           visibility: visible;
         }
       }

@@ -11,19 +11,28 @@
     <two-todo-list-form [panel]="listFormPanel"></two-todo-list-form>
   </mat-expansion-panel>
   <ul cdkDropList class="list" (cdkDropListDropped)="drop($event.previousIndex, $event.currentIndex, tasks)">
-    <li *ngFor="let task of tasks" class="list-item" cdkDrag>
+    <li *ngFor="let task of tasks; let i = index" class="list-item" cdkDrag>
       <a twoTodoSwipe (swipeEnd)="processAction($event, task, tasks)" class="list-item-content" tabindex="0">
         <div class="list-item-drag" [class.done]="task.status" cdkDragHandle></div>
         <div class="list-item-task">
-          <del *ngIf="task.status; else undone">{{task.text}}</del>
-          <ng-template #undone><span>{{task.text}}</span></ng-template>
+          <p
+            #listTask
+            (input)="edit(task, $event)"
+            (keydown.enter)="edit(task)"
+            (blur)="edit(task)"
+            class="list-item-text"
+            [class.done]="task.status"
+          >{{task.text}}</p>
+          <button mat-icon-button class="list-item-edit" (click)="toggleEdit(i)" tabindex="0">
+            <mat-icon>edit</mat-icon>
+          </button>
         </div>
         <div class="list-item-actions">
-          <button class="list-item-action" mat-icon-button color="accent" (click)="toggleStatus(task, tasks)" tabindex="0">
+          <button mat-icon-button class="list-item-action" color="accent" (click)="toggleStatus(task, tasks)" tabindex="0">
             <mat-icon *ngIf="task.status">check_box</mat-icon>
             <mat-icon *ngIf="!task.status">check_box_outline_blank</mat-icon>
           </button>
-          <button class="list-item-action" mat-icon-button color="warn" (click)="remove(task)" tabindex="0">
+          <button mat-icon-button class="list-item-action" color="warn" (click)="remove(task)" tabindex="0">
             <mat-icon>block</mat-icon>
           </button>
         </div>
