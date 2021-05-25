@@ -9,11 +9,13 @@ import { APP_CONFIG, AppConfig } from '../../models/app-config';
   styleUrls: ['./main.component.scss']
 })
 export class MainComponent implements AfterViewInit {
+  #currentWidth = 0;
   @ViewChild('drawer') drawer!: MatDrawer;
   @HostListener('window:resize', ['$event'])
   onResize(): void { // toggles sidebar mode when window width crosses mobile endpoint
-    if (this.drawer) {
-      if (window.innerWidth > this.config.mobileEndpoint) {
+    if (this.drawer && this.#currentWidth !== window.innerWidth) {
+      this.#currentWidth = window.innerWidth;
+      if (this.#currentWidth > this.config.mobileEndpoint) {
         this.drawer.mode = 'side';
         this.drawer.opened = true;
       } else {

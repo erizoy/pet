@@ -1,8 +1,25 @@
+@import './src/styles/variables';
+
 .login {
-  &-form-wrapper {
-    padding-top: 40px;
-    display: flex;
-    justify-content: space-around;
+  &-form {
+    max-width: 201px;
+
+    &-wrapper {
+      padding-top: 40px;
+      display: flex;
+      justify-content: space-around;
+    }
+
+    &-toggle {
+      text-align: center;
+
+      a {
+        display: block;
+        margin-top: 14px;
+        cursor: pointer;
+        color: $accentColor;
+      }
+    }
   }
 
   &-button {

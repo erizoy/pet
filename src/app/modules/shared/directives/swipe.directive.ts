@@ -76,7 +76,7 @@ export class SwipeDirective implements OnInit, OnDestroy {
   }
 
   private emitSwipeEndEvent(): void {
-    if (Math.abs(this.#delta) > window.innerWidth * 0.3) {
+    if (Math.abs(this.#delta) > 54) {
       this.swipeEnd.emit(this.swipeEventByDelta());
     }
     this.#delta = 0;

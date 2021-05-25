@@ -23,6 +23,11 @@ body {
   color: $warnColor;
 }
 
+.error-popup {
+  background: $warnColor;
+  color: $white;
+}
+
 mat-label > mat-icon {
   vertical-align: middle !important;
 }

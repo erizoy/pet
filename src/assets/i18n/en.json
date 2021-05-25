@@ -21,10 +21,23 @@
   "LOGIN_FORM": {
     "EMAIL": "email",
     "PASSWORD": "password",
-    "ERRORS": {
-      "INVALID_PASSWORD": "Invalid password"
+    "BUTTONS": {
+      "login": "Login",
+      "register": "Register",
+      "forgotPassword": "Forgot password",
+      "resetPassword": "Change password"
     },
-    "BUTTON": "Login"
+    "SUCCESS": {
+      "forgotPassword": "We sent you an email with password recovery link",
+      "resetPassword": "You can now login using that password"
+    },
+    "ERRORS": {
+      "auth/user-not-found": "Invalid password",
+      "auth/wrong-password": "Invalid password",
+      "auth/invalid-email": "The email address is badly formatted",
+      "auth/email-already-in-use": "The email address is already in use by another account",
+      "auth/weak-password": "Password should be at least 6 characters"
+    }
   },
   "INFO_MODAL": {
     "TITLE": "Error occurred",

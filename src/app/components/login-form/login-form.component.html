@@ -1,22 +1,26 @@
 <mat-drawer-container autosize class="main login-form-wrapper">
   <form [formGroup]="form" class="login-form">
-    <div>
+    <div *ngIf="state !== 'resetPassword'">
       <mat-form-field appearance="fill">
         <mat-label>{{ 'LOGIN_FORM.EMAIL' | translate }}</mat-label>
         <input matInput formControlName="email" />
       </mat-form-field>
     </div>
-    <div>
+    <div *ngIf="state !== 'forgotPassword'">
       <mat-form-field appearance="fill">
         <mat-label>{{ 'LOGIN_FORM.PASSWORD' | translate }}</mat-label>
         <input matInput type="password" formControlName="password" />
       </mat-form-field>
     </div>
-    <p *ngIf="form.getError('wrongPassword')" class="error">
-      {{ 'LOGIN_FORM.ERRORS.INVALID_PASSWORD' | translate }}
-    </p>
-    <button mat-raised-button color="primary" class="login-button" (click)="login()">
-      {{ 'LOGIN_FORM.BUTTON' | translate }}
+    <button mat-raised-button color="primary" class="login-button" (click)="send()">
+      {{ 'LOGIN_FORM.BUTTONS.' + state | translate }}
     </button>
+    <div class="login-form-toggle" *ngIf="state !== 'resetPassword'">
+      <ng-container *ngFor="let item of states">
+        <a *ngIf="item !== state" (click)="state = item">
+          {{ 'LOGIN_FORM.BUTTONS.' + item | translate }}
+        </a>
+      </ng-container>
+    </div>
   </form>
 </mat-drawer-container>

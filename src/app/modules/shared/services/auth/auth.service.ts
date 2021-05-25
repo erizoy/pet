@@ -23,6 +23,24 @@ export class AuthService {
     );
   }
 
+  register(email: string, password: string): Observable<UserCredential> {
+    return from(
+      this.angularFireAuth.createUserWithEmailAndPassword(email, password)
+    );
+  }
+
+  forgotPassword(email: string): Observable<void> {
+    return from(
+      this.angularFireAuth.sendPasswordResetEmail(email, null)
+    );
+  }
+
+  resetPassword(code: string, newPassword: string): Observable<void> {
+    return from(
+      this.angularFireAuth.confirmPasswordReset(code, newPassword)
+    );
+  }
+
   logout(): Observable<unknown> {
     return from(
       this.angularFireAuth.signOut()

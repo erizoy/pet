@@ -21,10 +21,23 @@
   "LOGIN_FORM": {
     "EMAIL": "email",
     "PASSWORD": "пароль",
-    "ERRORS": {
-      "INVALID_PASSWORD": "Неверный пароль"
+    "BUTTONS": {
+      "login": "Войти",
+      "register": "Зарегистрироваться",
+      "forgotPassword": "Забыл пароль",
+      "resetPassword": "Изменить пароль"
     },
-    "BUTTON": "Войти"
+    "SUCCESS": {
+      "forgotPassword": "На указанную почту отправлено письмо со ссылкой на восстановление пароля",
+      "resetPassword": "Теперь вы можете авторизоваться используя новый пароль"
+    },
+    "ERRORS": {
+      "auth/user-not-found": "Неверный пароль",
+      "auth/wrong-password": "Неверный пароль",
+      "auth/invalid-email": "Проверьте правильность введённой почты",
+      "auth/email-already-in-use": "Такой адрес электронной почты уже используется",
+      "auth/weak-password": "Пароль не может быть короче 6 символов"
+    }
   },
   "INFO_MODAL": {
     "TITLE": "Произошла ошибка",
