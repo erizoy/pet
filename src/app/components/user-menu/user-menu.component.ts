@@ -15,7 +15,7 @@ export class UserMenuComponent {
   ) {}
 
   logout(): void {
-    this.router.navigate(['/']).then(() => { // This helps to unsubscribe from current list
+    this.router.navigate(['/list']).then(() => { // This helps to unsubscribe from current list
       this.auth.logout().subscribe(_ => {
         this.router.navigate(['/login']);
       });

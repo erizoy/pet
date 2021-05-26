@@ -3,7 +3,9 @@
   "MENU": "User menu",
   "LOGIN": "Login",
   "LOGOUT": "Logout",
-  "LISTS": {
+  "SIDEBAR": {
+    "LISTS": "Lists",
+    "NOTES": "Notes",
     "NEW_LIST": "new list",
     "SHARED": "Shared lists"
   },

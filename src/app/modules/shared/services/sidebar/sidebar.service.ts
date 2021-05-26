@@ -5,15 +5,15 @@ import { MatDrawer } from '@angular/material/sidenav';
   providedIn: 'root'
 })
 export class SidebarService {
-  #drawer!: MatDrawer;
+  #sidebarRef?: MatDrawer;
 
   constructor() { }
 
-  set drawer(input: MatDrawer) {
-    this.#drawer = input;
+  set sidebarRef(input: MatDrawer | undefined) {
+    this.#sidebarRef = input;
   }
 
-  get drawer(): MatDrawer {
-    return this.#drawer;
+  get sidebarRef(): MatDrawer | undefined {
+    return this.#sidebarRef;
   }
 }

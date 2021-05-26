@@ -6,28 +6,19 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { AngularFireModule } from '@angular/fire';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
-import { MatSidenavModule } from '@angular/material/sidenav';
-import { MatButtonModule } from '@angular/material/button';
-import { MatMenuModule } from '@angular/material/menu';
-import { MatInputModule } from '@angular/material/input';
-import { MatIconModule } from '@angular/material/icon';
-import { MatDialogModule } from '@angular/material/dialog';
-import { MatExpansionModule } from '@angular/material/expansion';
-import { MatListModule } from '@angular/material/list';
-import { MatSnackBarModule } from '@angular/material/snack-bar';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormsModule } from '@angular/forms';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
-import { DragDropModule } from '@angular/cdk/drag-drop';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatIconModule } from '@angular/material/icon';
+import { MatListModule } from '@angular/material/list';
+import { MatInputModule } from '@angular/material/input';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatButtonModule } from '@angular/material/button';
 import { SharedModule } from './modules/shared/shared.module';
-import { TaskFormComponent } from './components/task-form/task-form.component';
-import { MainComponent } from './components/main/main.component';
 import { UserMenuComponent } from './components/user-menu/user-menu.component';
-import { ListsComponent } from './components/lists/lists.component';
-import { ListComponent } from './components/list/list.component';
-import { LoginFormComponent } from './components/login-form/login-form.component';
-import { ListFormComponent } from './components/list-form/list-form.component';
+import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { APP_CONFIG, TWO_TODO_CONFIG } from './models/app-config';
 
 export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
@@ -38,17 +29,11 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
   declarations: [
     AppComponent,
     UserMenuComponent,
-    ListsComponent,
-    ListComponent,
-    LoginFormComponent,
-    MainComponent,
-    TaskFormComponent,
-    ListFormComponent
+    SidebarComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    ReactiveFormsModule,
     FormsModule,
     SharedModule,
     AngularFireModule.initializeApp(environment.firebase),
@@ -61,16 +46,12 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
         deps: [HttpClient]
       }
     }),
-    DragDropModule,
     MatSidenavModule,
-    MatButtonModule,
     MatIconModule,
-    MatMenuModule,
     MatListModule,
     MatInputModule,
-    MatDialogModule,
-    MatExpansionModule,
-    MatSnackBarModule
+    MatMenuModule,
+    MatButtonModule
   ],
   providers: [{
     provide: APP_CONFIG,

@@ -1,0 +1,33 @@
+<h3 class="title">{{ 'SIDEBAR.LISTS' | translate }}</h3>
+<mat-nav-list>
+  <ng-container *ngFor="let item of listService.lists$ | async">
+    <a mat-list-item [routerLink]="['/list/' + item.uuid]" routerLinkActive="active" tabindex="0">
+      {{ item.title }}
+    </a>
+  </ng-container>
+  <div class="list-new">
+    <mat-form-field appearance="fill">
+      <mat-label>{{ 'SIDEBAR.NEW_LIST' | translate }}</mat-label>
+      <mat-icon matSuffix>playlist_add</mat-icon>
+      <input
+        matInput
+        tabindex="0"
+        [(ngModel)]="newList"
+        (keyup.enter)="create()"
+        (blur)="create()"
+        autocomplete="off"/>
+    </mat-form-field>
+  </div>
+</mat-nav-list>
+<ng-container *ngIf="listService.foreignLists$ | async as foreignLists">
+  <h2 *ngIf="foreignLists.length > 0" class="caption">
+    {{ 'SIDEBAR.SHARED' | translate }}
+  </h2>
+  <mat-nav-list>
+    <ng-container *ngFor="let item of foreignLists">
+      <a mat-list-item [routerLink]="['/list/' + item.uuid]" routerLinkActive="active" tabindex="0">
+        {{ item.title }}
+      </a>
+    </ng-container>
+  </mat-nav-list>
+</ng-container>

@@ -2,18 +2,17 @@ import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { AuthService } from '../../modules/shared/services/auth/auth.service';
+import { AuthService } from '../shared/services/auth/auth.service';
 import { TranslateService } from '@ngx-translate/core';
 import { Observable } from 'rxjs';
 
 type State = 'login' | 'register' | 'forgotPassword' | 'resetPassword';
 
 @Component({
-  selector: 'two-todo-login-form',
-  templateUrl: './login-form.component.html',
-  styleUrls: ['./login-form.component.scss']
+  templateUrl: './login.component.html',
+  styleUrls: ['./login.component.scss']
 })
-export class LoginFormComponent {
+export class LoginComponent {
   form: FormGroup;
   state: State = 'login';
   states: State[] = ['login', 'register', 'forgotPassword'];
@@ -72,7 +71,7 @@ export class LoginFormComponent {
           this.snackBar.open(message, undefined, { duration: 3000 });
         });
       } else {
-        this.router.navigate(['/']);
+        this.router.navigate(['/list']);
       }
     }, error => {
       this.form.setErrors({[error.code]: true});

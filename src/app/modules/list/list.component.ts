@@ -1,22 +1,21 @@
-import { Component, ElementRef, Inject, NgZone, OnInit, QueryList, ViewChild, ViewChildren } from '@angular/core';
+import { Component, ElementRef, Inject, NgZone, OnDestroy, OnInit, QueryList, ViewChild, ViewChildren } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
 import { MatExpansionPanel } from '@angular/material/expansion';
 import { moveItemInArray } from '@angular/cdk/drag-drop';
 import { takeUntil } from 'rxjs/operators';
-import { ListService } from '../../modules/shared/services/list/list.service';
-import { TaskService } from '../../modules/shared/services/task/task.service';
-import { SidebarService } from '../../modules/shared/services/sidebar/sidebar.service';
-import { BaseComponent } from '../../modules/shared/components/base/base.component';
+import { ListService } from '../shared/services/list/list.service';
+import { TaskService } from '../shared/services/task/task.service';
+import { SidebarService } from '../shared/services/sidebar/sidebar.service';
+import { BaseComponent } from '../shared/components/base/base.component';
 import { SwipeEvent } from '../../models/swipe-event';
 import { ListTask } from '../../models/list';
 
 @Component({
-  selector: 'two-todo-list',
   templateUrl: './list.component.html',
   styleUrls: ['./list.component.scss']
 })
-export class ListComponent extends BaseComponent implements OnInit {
+export class ListComponent extends BaseComponent implements OnInit, OnDestroy {
   @ViewChild('listFormPanel') listFormPanel!: MatExpansionPanel;
   @ViewChildren('listTask') listTasks!: QueryList<ElementRef>;
   #selectedListTask: HTMLSpanElement | null = null;
@@ -43,6 +42,12 @@ export class ListComponent extends BaseComponent implements OnInit {
       });
   }
 
+  ngOnDestroy(): void {
+    super.ngOnDestroy();
+    this.taskService.load(null);
+    this.listService.setList(null);
+  }
+
   removeList(): void {
     this.listService.remove();
   }
@@ -58,7 +63,6 @@ export class ListComponent extends BaseComponent implements OnInit {
         this.#selectedListTask.blur();
         const text = this.#selectedListTask.innerText.replace(/\n|&nbsp;/g, '').trim();
         this.#selectedListTask.innerHTML = text;
-        console.log(text);
 
         this.taskService.update(task.uuid, {text});
       }

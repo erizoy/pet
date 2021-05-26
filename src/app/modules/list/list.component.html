@@ -3,7 +3,7 @@
     <button mat-icon-button (click)="toggleListForm()" [color]="listFormPanel.expanded ? 'primary' : null">
       <mat-icon>settings</mat-icon>
     </button>
-    <button mat-icon-button [routerLink]="['/']">
+    <button mat-icon-button [routerLink]="['/list']">
       <mat-icon>close</mat-icon>
     </button>
   </div>
@@ -47,11 +47,11 @@
 </ng-container>
 <ng-template #selectList>
   <p style="font-size: 24px;">{{ 'LIST.PLEASE' | translate }}
-    <ng-container *ngIf="sidebarService.drawer?.opened; else toggle">
+    <ng-container *ngIf="sidebarService.sidebarRef?.opened; else toggle">
       {{ 'LIST.SELECT' | translate }}
     </ng-container>
     <ng-template #toggle>
-      <a class="list-select" (click)="sidebarService.drawer.open()">{{ 'LIST.SELECT' | translate }}</a>
+      <a class="list-select" (click)="sidebarService.sidebarRef?.open()">{{ 'LIST.SELECT' | translate }}</a>
     </ng-template>
     {{ 'LIST.OR_CREATE' | translate }}
   </p>

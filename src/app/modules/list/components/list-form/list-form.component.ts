@@ -2,9 +2,9 @@ import { Component, Input } from '@angular/core';
 import { Router } from '@angular/router';
 import { MatExpansionPanel } from '@angular/material/expansion';
 import { takeUntil } from 'rxjs/operators';
-import { ListService } from '../../modules/shared/services/list/list.service';
-import { List } from '../../models/list';
-import { BaseComponent } from '../../modules/shared/components/base/base.component';
+import { ListService } from '../../../shared/services/list/list.service';
+import { List } from '../../../../models/list';
+import { BaseComponent } from '../../../shared/components/base/base.component';
 
 @Component({
   selector: 'two-todo-list-form',
@@ -44,7 +44,7 @@ export class ListFormComponent extends BaseComponent {
 
   remove(): void {
     this.listService.remove();
-    this.router.navigate(['/']);
+    this.router.navigate(['/list']);
   }
 
 }

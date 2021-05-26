@@ -1,4 +1,4 @@
-import { Inject, Injectable } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { AngularFireDatabase, AngularFireObject } from '@angular/fire/database';
 import { BehaviorSubject, Observable, Subscription } from 'rxjs';
 import { List } from '../../../../models/list';
@@ -56,11 +56,11 @@ export class ListService extends BaseService {
     if (listUuid) {
       this.#listUuid = listUuid;
       this.#list = this.db.object<List>(`lists/${listUuid}`);
+      this.#list$?.unsubscribe();
       this.#list$ = this.#list.valueChanges().pipe(catchError(this.errorHandler.bind(this)))
         .subscribe(list => this.list$.next(list && this.#email ? new List(list, this.#email) : null));
     } else {
       this.#list$?.unsubscribe();
-      this.#list = this.#listUuid = undefined;
       this.list$.next(null);
     }
   }

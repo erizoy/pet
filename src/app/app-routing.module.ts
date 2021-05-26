@@ -1,32 +1,32 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { MainComponent } from './components/main/main.component';
-import { LoginFormComponent } from './components/login-form/login-form.component';
 import { AngularFireAuthGuard, redirectLoggedInTo, redirectUnauthorizedTo } from '@angular/fire/auth-guard';
 
 const redirectUnauthorizedToLogin = () => redirectUnauthorizedTo(['/login']);
-const redirectLoggedInToMain = () => redirectLoggedInTo(['/']);
+const redirectLoggedInToMain = () => redirectLoggedInTo(['/list']);
 
 const routes: Routes = [
   {
+    path: '',
+    redirectTo: 'list',
+    pathMatch: 'full'
+  }, {
     path: 'login',
-    component: LoginFormComponent,
+    loadChildren: () => import('./modules/login/login.module').then(m => m.LoginModule),
     canActivate: [AngularFireAuthGuard],
     data: {
       authGuardPipe: redirectLoggedInToMain
     }
-  },
-  {
-    path: ':uuid',
-    component: MainComponent,
+  }, {
+    path: 'list',
+    loadChildren: () => import('./modules/list/list.module').then(m => m.ListModule),
     canActivate: [AngularFireAuthGuard],
     data: {
       authGuardPipe: redirectUnauthorizedToLogin
     }
-  },
-  {
-    path: '',
-    component: MainComponent,
+  }, {
+    path: 'notes',
+    loadChildren: () => import('./modules/notes/notes.module').then(m => m.NotesModule),
     canActivate: [AngularFireAuthGuard],
     data: {
       authGuardPipe: redirectUnauthorizedToLogin

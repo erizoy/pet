@@ -1,7 +1,7 @@
 import { Component, ElementRef, Input, ViewChild } from '@angular/core';
 import { timer } from 'rxjs';
-import { TaskService } from '../../modules/shared/services/task/task.service';
-import { BaseComponent } from '../../modules/shared/components/base/base.component';
+import { TaskService } from '../../../shared/services/task/task.service';
+import { BaseComponent } from '../../../shared/components/base/base.component';
 import { takeUntil } from 'rxjs/operators';
 
 @Component({

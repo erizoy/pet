@@ -3,7 +3,7 @@
     <h1
       *ngIf="auth.user$ | async"
       class="header-title"
-      (click)="sidebarService.drawer.open()">
+      (click)="sidebar?.toggle()">
       <button
         mat-icon-button
         color="primary"
@@ -16,4 +16,18 @@
     <two-todo-user-menu></two-todo-user-menu>
   </header>
 </mat-sidenav-container>
-<router-outlet></router-outlet>
+<ng-container *ngIf="auth.user$ | async; else login">
+  <mat-drawer-container autosize class="main">
+    <mat-drawer #sidebar [mode]="sidebarMode">
+      <two-todo-sidebar></two-todo-sidebar>
+    </mat-drawer>
+    <mat-drawer-content>
+      <div class="content">
+        <router-outlet></router-outlet>
+      </div>
+    </mat-drawer-content>
+  </mat-drawer-container>
+</ng-container>
+<ng-template #login>
+  <router-outlet></router-outlet>
+</ng-template>
