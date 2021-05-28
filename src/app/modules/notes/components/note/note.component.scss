@@ -1,0 +1,33 @@
+.note {
+  cursor: pointer;
+  margin-bottom: 24px;
+
+  &-wrapper {
+    position: relative;
+  }
+
+  &-remove {
+    position: absolute;
+    z-index: 1;
+    top: 0;
+    right: 0;
+  }
+
+  &-content {
+    outline: none;
+
+    &.edit {
+      white-space: pre-line;
+    }
+
+    ::ng-deep {
+      * {
+        white-space: pre-line;
+      }
+
+      p:last-child {
+        margin-bottom: 0;
+      }
+    }
+  }
+}

@@ -136,11 +136,6 @@
     }
   }
 
-  &-select {
-    color: $accentColor;
-    cursor: pointer;
-  }
-
   &:not(.cdk-drop-list-dragging) {
     .list-item-content {
       &:hover,

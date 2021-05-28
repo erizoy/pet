@@ -8,6 +8,7 @@ import { AngularFireModule } from '@angular/fire';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { MarkdownModule } from 'ngx-markdown';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { MatSidenavModule } from '@angular/material/sidenav';
@@ -39,6 +40,7 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
     AngularFireModule.initializeApp(environment.firebase),
     NoopAnimationsModule,
     HttpClientModule,
+    MarkdownModule.forRoot(), // issue: https://github.com/jfcere/ngx-markdown/issues/277
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,

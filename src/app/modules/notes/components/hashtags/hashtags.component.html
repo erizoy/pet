@@ -1,0 +1,8 @@
+<mat-chip-list multiple>
+  <mat-chip *ngFor="let hashtag of hashtags$ | async" (click)="select(hashtag)" [selected]="hashtag.selected">
+    {{hashtag.value}}
+  </mat-chip>
+  <button *ngIf="selected" mat-mini-fab color="primary" (click)="clear()">
+    <mat-icon>close</mat-icon>
+  </button>
+</mat-chip-list>

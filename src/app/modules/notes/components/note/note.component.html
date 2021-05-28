@@ -1,0 +1,24 @@
+<div class="note-wrapper">
+  <button mat-icon-button class="note-remove" (click)="noteService.remove(note.uuid)">
+    <mat-icon color="warn">delete</mat-icon>
+  </button>
+  <mat-card class="note" (click)="focusNote()">
+    <mat-card-content>
+      <div
+        #noteContent
+        class="note-content"
+        [class.edit]="edit"
+        (blur)="blurNote()"
+        (keyup.control.enter)="blurNote()"
+        (paste)="stripHtml($event)"
+        [innerHTML]="edit ? (note.text | safeHtml) : (note.text | markdown)"
+      ></div>
+    </mat-card-content>
+    <mat-card-actions (click)="preventEdit($event)">
+      <two-todo-note-hashtags
+        [hashtags]="note.hashtags"
+        (onSave)="saveHashtags($event)"
+      ></two-todo-note-hashtags>
+    </mat-card-actions>
+  </mat-card>
+</div>

@@ -1,0 +1,29 @@
+<mat-form-field *ngIf="editMode; else plainHashtags" class="hashtags">
+  <mat-label>{{ 'NOTES.HASHTAGS' | translate }}</mat-label>
+  <mat-chip-list #hashtagList>
+    <mat-chip
+      *ngFor="let hashtag of hashtags"
+      [removable]="true"
+      (removed)="removeHashtag(hashtag)"
+    >
+      {{hashtag}}
+      <mat-icon matChipRemove>cancel</mat-icon>
+    </mat-chip>
+    <input
+      #hashtagEditor
+      [placeholder]="'NOTES.NEW_HASHTAG' | translate"
+      [matChipInputFor]="hashtagList"
+      [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+      [matChipInputAddOnBlur]="true"
+      (matChipInputTokenEnd)="addHashtag($event)"
+      (keydown.enter)="save()"/>
+  </mat-chip-list>
+</mat-form-field>
+<ng-template #plainHashtags>
+  <a *ngFor="let hashtag of hashtags" class="link">
+    #{{hashtag}}
+  </a>
+  <button mat-icon-button color="accent" (click)="editHashtags()">
+    <mat-icon>tag</mat-icon>
+  </button>
+</ng-template>

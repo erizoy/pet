@@ -14,6 +14,14 @@
     "SELECT": "select",
     "OR_CREATE": "or create new list"
   },
+  "NOTES": {
+    "EMPTY": "You have no notes. You can",
+    "CREATE": "create new",
+    "EMPTY_FILTER": "You haven't notes with selected hashtags.",
+    "CLEAR_FILTER": "Clear filters",
+    "HASHTAGS": "hashtags",
+    "NEW_HASHTAG": "new hashtag..."
+  },
   "LIST_FORM": {
     "TITLE": "title",
     "GUEST": "guest",

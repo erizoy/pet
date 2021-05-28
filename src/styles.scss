@@ -14,6 +14,10 @@ body {
   min-height: calc(100vh - 60px);
 }
 
+.content-wrapper {
+  overflow: hidden !important;
+}
+
 .content {
   max-width: 652px;
   margin: 20px;
@@ -26,6 +30,17 @@ body {
 .error-popup {
   background: $warnColor;
   color: $white;
+}
+
+a,
+.link {
+  color: $accentColor;
+  cursor: pointer;
+}
+
+.info-message {
+  font-size: 24px;
+  line-height: 32px;
 }
 
 mat-label > mat-icon {

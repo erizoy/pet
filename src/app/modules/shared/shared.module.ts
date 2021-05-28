@@ -6,12 +6,14 @@ import { InfoModalComponent } from './components/info-modal/info-modal.component
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialogModule } from '@angular/material/dialog';
 import { TranslateModule } from '@ngx-translate/core';
+import { SafeHtmlPipe } from './pipes/safe-html/safe-html.pipe';
 
 @NgModule({
   declarations: [
     BaseComponent,
     SwipeDirective,
-    InfoModalComponent
+    InfoModalComponent,
+    SafeHtmlPipe
   ],
   imports: [
     CommonModule,
@@ -21,7 +23,8 @@ import { TranslateModule } from '@ngx-translate/core';
   ],
   exports: [
     BaseComponent,
-    SwipeDirective
+    SwipeDirective,
+    SafeHtmlPipe
   ]
 })
 export class SharedModule {}

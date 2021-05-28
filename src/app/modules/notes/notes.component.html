@@ -1,0 +1,31 @@
+<ng-container *ngIf="noteService.notes$ | async as notes">
+  <ng-container *ngIf="notes.length > 0; else createNote">
+    <div class="wrapper">
+      <div class="notes">
+        <button mat-icon-button (click)="create()">
+          <mat-icon>add</mat-icon>
+        </button>
+        <ng-container *ngIf="noteService.filteredNotes$ | async as filteredNotes">
+          <ng-container *ngIf="filteredNotes.length > 0; else emptyFiltered">
+            <two-todo-note *ngFor="let note of filteredNotes;" [note]="note"></two-todo-note>
+          </ng-container>
+          <ng-template #emptyFiltered>
+            <p class="info-message">
+              {{ 'NOTES.EMPTY_FILTER' | translate }}
+              <a class="link" (click)="filter.clear()">{{ 'NOTES.CLEAR_FILTER' | translate }}</a>
+            </p>
+          </ng-template>
+        </ng-container>
+      </div>
+      <div class="hashtags">
+        <two-todo-hashtags #filter (onSelect)="filterNotes($event)"></two-todo-hashtags>
+      </div>
+    </div>
+  </ng-container>
+  <ng-template #createNote>
+    <p class="info-message">
+      {{ 'NOTES.EMPTY' | translate }}
+      <a class="link" (click)="create()">{{ 'NOTES.CREATE' | translate }}</a>
+    </p>
+  </ng-template>
+</ng-container>

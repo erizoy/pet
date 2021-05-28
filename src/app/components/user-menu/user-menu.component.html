@@ -2,12 +2,12 @@
   <button
     mat-icon-button
     color="primary"
-    [matMenuTriggerFor]="menu"
+    [matMenuTriggerFor]="userMenu"
   >
     <mat-icon>menu</mat-icon>
   </button>
-  <mat-menu #menu="matMenu">
-    <h3 mat-menu-item>{{user.email}}</h3>
+  <mat-menu #userMenu="matMenu">
+    <button mat-menu-item>{{user.email}}</button>
     <button mat-menu-item (click)="logout()">
       {{ 'LOGOUT' | translate }}
     </button>

@@ -1,0 +1,25 @@
+.wrapper {
+  display: flex;
+  justify-content: space-between;
+}
+
+.notes {
+  flex: auto;
+  margin-right: 24px;
+}
+
+.hashtags {
+  width: 152px;
+  min-width: 152px;
+}
+
+@media (max-width: 768px) {
+  .wrapper {
+    flex-wrap: wrap;
+    flex-direction: column-reverse;
+  }
+
+  .hashtags {
+    width: auto;
+  }
+}

@@ -12,7 +12,7 @@
   </mat-expansion-panel>
   <ul cdkDropList class="list" (cdkDropListDropped)="drop($event.previousIndex, $event.currentIndex, tasks)">
     <li *ngFor="let task of tasks; let i = index" class="list-item" cdkDrag>
-      <a twoTodoSwipe (swipeEnd)="processAction($event, task, tasks)" class="list-item-content" tabindex="0">
+      <div twoTodoSwipe (swipeEnd)="processAction($event, task, tasks)" class="list-item-content" tabindex="0">
         <div class="list-item-drag" [class.done]="task.status" cdkDragHandle></div>
         <div class="list-item-task">
           <p
@@ -36,7 +36,7 @@
             <mat-icon>block</mat-icon>
           </button>
         </div>
-      </a>
+      </div>
       <div class="list-item-underlay">
         <mat-icon class="icon-toggle">done</mat-icon>
         <mat-icon class="icon-remove">block</mat-icon>
@@ -46,12 +46,12 @@
   <two-todo-task-form [position]="tasks.length"></two-todo-task-form>
 </ng-container>
 <ng-template #selectList>
-  <p style="font-size: 24px;">{{ 'LIST.PLEASE' | translate }}
+  <p class="info-message">{{ 'LIST.PLEASE' | translate }}
     <ng-container *ngIf="sidebarService.sidebarRef?.opened; else toggle">
       {{ 'LIST.SELECT' | translate }}
     </ng-container>
     <ng-template #toggle>
-      <a class="list-select" (click)="sidebarService.sidebarRef?.open()">{{ 'LIST.SELECT' | translate }}</a>
+      <a class="link" (click)="sidebarService.sidebarRef?.open()">{{ 'LIST.SELECT' | translate }}</a>
     </ng-template>
     {{ 'LIST.OR_CREATE' | translate }}
   </p>

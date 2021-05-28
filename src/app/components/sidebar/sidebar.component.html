@@ -1,3 +1,8 @@
+<mat-nav-list>
+  <a mat-list-item [routerLink]="['/notes']" routerLinkActive="active" tabindex="0">
+    {{ 'SIDEBAR.NOTES' | translate }}
+  </a>
+</mat-nav-list>
 <h3 class="title">{{ 'SIDEBAR.LISTS' | translate }}</h3>
 <mat-nav-list>
   <ng-container *ngFor="let item of listService.lists$ | async">

@@ -1,13 +1,12 @@
 import { Injectable } from '@angular/core';
 import { AngularFireDatabase, AngularFireObject } from '@angular/fire/database';
-import { BehaviorSubject, Observable, Subscription } from 'rxjs';
-import { List } from '../../../../models/list';
-import { catchError } from 'rxjs/operators';
-import { AuthService } from '../auth/auth.service';
-import { Router } from '@angular/router';
 import { AngularFireList } from '@angular/fire/database/interfaces';
 import { MatDialog } from '@angular/material/dialog';
+import { BehaviorSubject, Observable, Subscription } from 'rxjs';
+import { catchError } from 'rxjs/operators';
+import { AuthService } from '../auth/auth.service';
 import { BaseService } from '../base/base.service';
+import { List } from '../../../../models/list';
 
 @Injectable({
   providedIn: 'root'
@@ -27,13 +26,12 @@ export class ListService extends BaseService {
   foreignLists$?: Observable<List[]>; // Observable for all lists, where user is guest
 
   constructor(
-    private router: Router,
     private db: AngularFireDatabase,
     private auth: AuthService,
     protected dialog: MatDialog
   ) {
     super(dialog);
-    // Subscription on current authenticated user. Emits when on first load or after user's login.
+    // Subscription on current authenticated user. Emits on first load or after user's login.
     this.auth.user$.subscribe(user => {
       if (user && user.uid) {
         this.#uid = user.uid;
