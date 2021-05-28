@@ -11,7 +11,9 @@
       >
         <mat-icon>list</mat-icon>
       </button>
-      <ng-container *ngIf="listService.list$ | async as list">{{list.title}}</ng-container>
+      <span *ngIf="listService.list$ | async as list">
+        {{list.title}} <sup>{{list.percentage}}%</sup>
+      </span>
     </h1>
     <two-todo-user-menu></two-todo-user-menu>
   </header>

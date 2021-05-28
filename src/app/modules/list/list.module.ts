@@ -8,6 +8,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatExpansionModule } from '@angular/material/expansion';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { SharedModule } from '../shared/shared.module';
 import { ListComponent } from './list.component';
 import { ListFormComponent } from './components/list-form/list-form.component';
@@ -31,7 +32,8 @@ import { ListRoutingModule } from './list-routing.module';
     MatButtonModule,
     MatIconModule,
     MatInputModule,
-    MatExpansionModule
+    MatExpansionModule,
+    MatSnackBarModule
   ]
 })
 export class ListModule {}

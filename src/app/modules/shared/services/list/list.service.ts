@@ -3,7 +3,7 @@ import { AngularFireDatabase, AngularFireObject } from '@angular/fire/database';
 import { AngularFireList } from '@angular/fire/database/interfaces';
 import { MatDialog } from '@angular/material/dialog';
 import { BehaviorSubject, Observable, Subscription } from 'rxjs';
-import { catchError } from 'rxjs/operators';
+import { catchError, map } from 'rxjs/operators';
 import { AuthService } from '../auth/auth.service';
 import { BaseService } from '../base/base.service';
 import { List } from '../../../../models/list';
@@ -37,9 +37,17 @@ export class ListService extends BaseService {
         this.#uid = user.uid;
         this.#email = user.email as string;
         this.#lists = this.db.list<List>(`lists`, ref => ref.orderByChild('userId').equalTo(user.uid));
-        this.lists$ = this.#lists.valueChanges([], {idField: 'uuid'}).pipe(catchError(this.errorHandler.bind(this)));
+        this.lists$ = this.#lists.valueChanges([], {idField: 'uuid'})
+          .pipe(
+            catchError(this.errorHandler.bind(this)),
+            map(lists => lists.map(list => new List(list, user.email as string)))
+          );
         this.#foreignLists = this.db.list<List>(`lists`, ref => ref.orderByChild('guest').equalTo(user.email));
-        this.foreignLists$ = this.#foreignLists.valueChanges([], {idField: 'uuid'}).pipe(catchError(this.errorHandler.bind(this)));
+        this.foreignLists$ = this.#foreignLists.valueChanges([], {idField: 'uuid'})
+          .pipe(
+            catchError(this.errorHandler.bind(this)),
+            map(lists => lists.map(list => new List(list, user.email as string)))
+          );
       } else {
         this.#lists = this.lists$ = this.#uid = this.#email = undefined;
       }

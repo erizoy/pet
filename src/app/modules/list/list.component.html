@@ -1,8 +1,13 @@
 <ng-container *ngIf="taskService.tasks$ | async as tasks; else selectList">
   <div class="list-buttons">
-    <button mat-icon-button (click)="toggleListForm()" [color]="listFormPanel.expanded ? 'primary' : null">
-      <mat-icon>settings</mat-icon>
-    </button>
+    <div>
+      <button mat-icon-button (click)="toggleListForm()" [color]="listFormPanel.expanded ? 'primary' : null">
+        <mat-icon>settings</mat-icon>
+      </button>
+      <button mat-icon-button (click)="copyList(tasks)">
+        <mat-icon>content_copy</mat-icon>
+      </button>
+    </div>
     <button mat-icon-button [routerLink]="['/list']">
       <mat-icon>close</mat-icon>
     </button>

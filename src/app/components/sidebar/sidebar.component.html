@@ -6,9 +6,7 @@
 <h3 class="title">{{ 'SIDEBAR.LISTS' | translate }}</h3>
 <mat-nav-list>
   <ng-container *ngFor="let item of listService.lists$ | async">
-    <a mat-list-item [routerLink]="['/list/' + item.uuid]" routerLinkActive="active" tabindex="0">
-      {{ item.title }}
-    </a>
+    <ng-container *ngTemplateOutlet="listItem; context: {item: item}"></ng-container>
   </ng-container>
   <div class="list-new">
     <mat-form-field appearance="fill">
@@ -30,9 +28,13 @@
   </h2>
   <mat-nav-list>
     <ng-container *ngFor="let item of foreignLists">
-      <a mat-list-item [routerLink]="['/list/' + item.uuid]" routerLinkActive="active" tabindex="0">
-        {{ item.title }}
-      </a>
+      <ng-container *ngTemplateOutlet="listItem; context: {item: item}"></ng-container>
     </ng-container>
   </mat-nav-list>
 </ng-container>
+
+<ng-template #listItem let-item="item">
+  <a mat-list-item [routerLink]="['/list/' + item.uuid]" routerLinkActive="active" tabindex="0">
+    <span>{{ item.title }} <sup>{{item.percentage}}%</sup></span>
+  </a>
+</ng-template>

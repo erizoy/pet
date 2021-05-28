@@ -3,6 +3,8 @@ import { DOCUMENT } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
 import { MatExpansionPanel } from '@angular/material/expansion';
 import { moveItemInArray } from '@angular/cdk/drag-drop';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { TranslateService } from '@ngx-translate/core';
 import { takeUntil } from 'rxjs/operators';
 import { ListService } from '../shared/services/list/list.service';
 import { TaskService } from '../shared/services/task/task.service';
@@ -23,6 +25,8 @@ export class ListComponent extends BaseComponent implements OnInit, OnDestroy {
   constructor(
     private ngZone: NgZone,
     private route: ActivatedRoute,
+    private translate: TranslateService,
+    private snackBar: MatSnackBar,
     public listService: ListService,
     public taskService: TaskService,
     public sidebarService: SidebarService,
@@ -130,5 +134,23 @@ export class ListComponent extends BaseComponent implements OnInit, OnDestroy {
     this.ngZone.runOutsideAngular(() => { // for better performance
       this.listService.update({tasks: data} as Partial<ListTask>);
     });
+  }
+
+  copyList(tasks: ListTask[]): void {
+    let text = `${this.listService.list$.getValue()?.title}: \n`;
+    text += tasks
+      .filter(tasks => !tasks.status)
+      .map(task => task.text)
+      .join('\n');
+
+    if (navigator.clipboard) {
+      navigator.clipboard.writeText(text).then(() => {
+        this.translate.get(`LIST.COPY_SUCCESS`).subscribe(message => {
+          this.snackBar.open(message, undefined, { duration: 3000 });
+        });
+      });
+    } else {
+      window.prompt("Copy to clipboard: ", text);
+    }
   }
 }

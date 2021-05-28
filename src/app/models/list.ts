@@ -28,6 +28,8 @@ export interface List {
 export class List {
   /** `false` means, that current user is the owner of the `List` */
   public isGuest = false;
+  /** percentage of done tasks */
+  public percentage: number = 0;
 
   /**
    * Creates instance of `List` class.
@@ -44,6 +46,12 @@ export class List {
     if (list.guest) {
       this.guest = list.guest;
       this.isGuest = this.guest === email;
+    }
+
+    if (list.tasks) {
+      const tasksObject = list.tasks;
+      const tasks = Object.values(tasksObject)
+      this.percentage = Math.floor(tasks.filter(task => task.status).length / tasks.length * 100);
     }
   }
 }

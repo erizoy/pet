@@ -12,7 +12,8 @@
   "LIST": {
     "PLEASE": "Please",
     "SELECT": "select",
-    "OR_CREATE": "or create new list"
+    "OR_CREATE": "or create new list",
+    "COPY_SUCCESS": "Lists copied to clipboard"
   },
   "NOTES": {
     "EMPTY": "You have no notes. You can",
