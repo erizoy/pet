@@ -13,7 +13,9 @@
     </button>
   </div>
   <mat-expansion-panel #listFormPanel>
-    <two-todo-list-form [panel]="listFormPanel"></two-todo-list-form>
+    <ng-container *ngIf="listService.list$ | async as list">
+      <two-todo-list-form [list]="list" [panel]="listFormPanel"></two-todo-list-form>
+    </ng-container>
   </mat-expansion-panel>
   <ul cdkDropList class="list" (cdkDropListDropped)="drop($event.previousIndex, $event.currentIndex, tasks)">
     <li *ngFor="let task of tasks; let i = index" class="list-item" cdkDrag>

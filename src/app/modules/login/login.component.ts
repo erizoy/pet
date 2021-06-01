@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { MatSnackBar } from '@angular/material/snack-bar';
-import { AuthService } from '../shared/services/auth/auth.service';
 import { TranslateService } from '@ngx-translate/core';
 import { Observable } from 'rxjs';
+import { take } from 'rxjs/operators';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { AuthService } from '../shared/services/auth/auth.service';
 
 type State = 'login' | 'register' | 'forgotPassword' | 'resetPassword';
 
@@ -65,21 +66,20 @@ export class LoginComponent {
 
     request$.subscribe(() => {
       if (['resetPassword', 'forgotPassword'].includes(this.state)) {
-        this.translate.get(`LOGIN_FORM.SUCCESS.${this.state}`).subscribe(message => {
+        this.translate.get(`LOGIN_FORM.SUCCESS.${this.state}`).pipe(take(1)).subscribe(message => {
           this.state = 'login';
           this.form.setValue({email: '', password: ''});
-          this.snackBar.open(message, undefined, { duration: 3000 });
+          this.snackBar.open(message);
         });
       } else {
         this.router.navigate(['/list']);
       }
     }, error => {
       this.form.setErrors({[error.code]: true});
-      this.translate.get(`LOGIN_FORM.ERRORS.${error.code}`).subscribe(message => {
+      this.translate.get(`LOGIN_FORM.ERRORS.${error.code}`).pipe(take(1)).subscribe(message => {
         message = message.indexOf('ERRORS') > 0 ? error.message : message;
 
         this.snackBar.open(message, undefined, {
-          duration: 3000,
           panelClass: ['error-popup']
         });
       });

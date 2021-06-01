@@ -2,9 +2,11 @@ import { ChangeDetectorRef, Component, HostListener, Inject, ViewChild } from '@
 import { NavigationEnd, Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { MatDrawer } from '@angular/material/sidenav';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { AuthService } from './modules/shared/services/auth/auth.service';
 import { ListService } from './modules/shared/services/list/list.service';
 import { SidebarService } from './modules/shared/services/sidebar/sidebar.service';
+import { MessageService } from './modules/shared/services/message/message.service';
 import { APP_CONFIG, AppConfig } from './models/app-config';
 
 @Component({
@@ -13,10 +15,12 @@ import { APP_CONFIG, AppConfig } from './models/app-config';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
+  #currentWidth?: number;
   @ViewChild('sidebar') sidebar?: MatDrawer;
   @HostListener('window:resize', ['$event'])
   checkSidebar(): void { // toggles sidebar mode when window width crosses mobile endpoint
-    if (this.sidebar) {
+    if (this.sidebar && this.#currentWidth !== window.innerWidth) {
+      this.#currentWidth = window.innerWidth;
       if (window.innerWidth > this.config.mobileEndpoint && !this.sidebar.opened) {
         this.sidebar.open();
       } else if (window.innerWidth <= this.config.mobileEndpoint && this.sidebar.opened) {
@@ -36,10 +40,11 @@ export class AppComponent {
     private cdRef: ChangeDetectorRef,
     public auth: AuthService,
     public listService: ListService,
-    private sidebarService: SidebarService
+    private sidebarService: SidebarService,
+    private messageService: MessageService,
+    private snackBar: MatSnackBar,
   ) {
     // setting language
-
     const lang = ['en', 'ru'].includes(translate.getBrowserLang()) ?
       translate.getBrowserLang() : // use browser language only if it is Russian or English
       'en'; // English is default for other cases
@@ -57,6 +62,10 @@ export class AppComponent {
         }
       }
     });
+
+    this.messageService.messages$.subscribe(message => {
+      this.snackBar.open(`${message.data.title}: ${message.data.body}`)
+    })
   }
 
   setSidebar(): void {

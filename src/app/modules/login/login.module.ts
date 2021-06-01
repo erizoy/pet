@@ -4,7 +4,6 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { TranslateModule } from '@ngx-translate/core';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatInputModule } from '@angular/material/input';
-import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { LoginComponent } from './login.component';
 import { SharedModule } from '../shared/shared.module';
 import { LoginRoutingModule } from './login-routing.module';
@@ -22,7 +21,6 @@ import { MatButtonModule } from '@angular/material/button';
     TranslateModule,
     MatSidenavModule,
     MatInputModule,
-    MatSnackBarModule,
     MatButtonModule
   ]
 })

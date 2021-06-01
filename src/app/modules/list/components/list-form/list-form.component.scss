@@ -3,7 +3,19 @@
     margin-top: 36px;
   }
 
-  &-remove {
+  &-control {
     margin-top: 16px;
+  }
+
+  &-checkbox {
+    ::ng-deep {
+      .mat-checkbox-label {
+        white-space: normal;
+      }
+
+      .mat-checkbox-inner-container {
+        margin-top: 4px;
+      }
+    }
   }
 }

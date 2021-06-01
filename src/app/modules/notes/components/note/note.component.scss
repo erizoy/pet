@@ -17,12 +17,12 @@
     outline: none;
 
     &.edit {
-      white-space: pre-line;
+      white-space: pre-wrap;
     }
 
     ::ng-deep {
       * {
-        white-space: pre-line;
+        white-space: pre-wrap;
       }
 
       p:last-child {

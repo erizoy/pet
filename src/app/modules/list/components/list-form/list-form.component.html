@@ -1,10 +1,11 @@
-<div *ngIf="!isGuest" class="list-form">
+<div *ngIf="!list.isGuest" class="list-form">
   <div>
     <mat-form-field appearance="fill">
       <mat-label>{{ 'LIST_FORM.TITLE' | translate }}</mat-label>
       <mat-icon matSuffix>title</mat-icon>
       <input
         matInput
+        name="title"
         [(ngModel)]="title"
         (keyup.enter)="update({title: title})"
         (blur)="update({title: title})"
@@ -17,6 +18,7 @@
       <mat-icon matSuffix>person_add</mat-icon>
       <input
         matInput
+        name="guest"
         [(ngModel)]="guest"
         (keyup.enter)="update({guest: guest})"
         (blur)="update({guest: guest})"
@@ -24,7 +26,13 @@
     </mat-form-field>
   </div>
 </div>
-<button mat-raised-button class="list-remove" (click)="remove()" color="warn">
+<div *ngIf="list.isGuest || list.isOwner" class="list-control">
+  <mat-checkbox class="list-checkbox" [checked]="list.subscribed" (change)="toggleSubscription($event)">
+    {{ 'LIST.NOTIFICATION' | translate }}
+    {{ (list.isOwner ? 'LIST.GUEST' : 'LIST.HOST') | translate }}
+  </mat-checkbox>
+</div>
+<button mat-raised-button class="list-control" (click)="remove()" color="warn">
   {{ 'LIST_FORM.REMOVE' | translate }}
-  <ng-container *ngIf="isGuest">{{ 'LIST_FORM.FROM_SHARED' | translate }}</ng-container>
+  <ng-container *ngIf="list.isGuest">{{ 'LIST_FORM.FROM_SHARED' | translate }}</ng-container>
 </button>

@@ -2,8 +2,8 @@
 export interface Note {
   /** Unique identifier */
   uuid: string;
-  /** Owner's id */
-  userId: string;
+  /** Owner's owner */
+  owner: string;
   /** Hashtag for filtering */
   hashtags: string[];
   /** Note's text */
@@ -20,7 +20,7 @@ export class Note {
    */
   constructor(note: Note) {
     this.uuid = note.uuid;
-    this.userId = note.userId;
+    this.owner = note.owner;
     this.text = note.text;
     this.hashtags = note.hashtags || [];
   }

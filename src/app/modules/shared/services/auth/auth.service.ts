@@ -3,6 +3,8 @@ import { AngularFireAuth } from '@angular/fire/auth';
 import { from, Observable } from 'rxjs';
 import firebase from 'firebase';
 import UserCredential = firebase.auth.UserCredential;
+import { take, tap } from 'rxjs/operators';
+import { LoaderService } from '../loader/loader.service';
 
 @Injectable({
   providedIn: 'root'
@@ -10,17 +12,22 @@ import UserCredential = firebase.auth.UserCredential;
 export class AuthService {
 
   constructor(
-    private angularFireAuth: AngularFireAuth
-  ) {}
+    private angularFireAuth: AngularFireAuth,
+    private loader: LoaderService
+  ) {
+    this.user$.pipe(take(1)).subscribe(_ => {
+      this.loader.hide();
+    })
+  }
 
   get user$(): Observable<firebase.User | null> {
     return this.angularFireAuth.user;
   }
 
   login(email: string, password: string): Observable<UserCredential> {
-    return from(
-      this.angularFireAuth.signInWithEmailAndPassword(email, password)
-    );
+    this.loader.show();
+    return from(this.angularFireAuth.signInWithEmailAndPassword(email, password))
+      .pipe(tap(()  => this.loader.hide()));
   }
 
   register(email: string, password: string): Observable<UserCredential> {
@@ -42,9 +49,9 @@ export class AuthService {
   }
 
   logout(): Observable<unknown> {
-    return from(
-      this.angularFireAuth.signOut()
-    );
+    this.loader.show();
+    return from(this.angularFireAuth.signOut())
+      .pipe(tap(()  => this.loader.hide()));
   }
 
 }

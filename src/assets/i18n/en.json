@@ -13,7 +13,11 @@
     "PLEASE": "Please",
     "SELECT": "select",
     "OR_CREATE": "or create new list",
-    "COPY_SUCCESS": "Lists copied to clipboard"
+    "COPY_SUCCESS": "Lists copied to clipboard",
+    "NOTIFICATION": "Receive notifications on list change by",
+    "ERROR_NOTIFICATION": "Permission was denied",
+    "GUEST": "guest",
+    "HOST": "host"
   },
   "NOTES": {
     "EMPTY": "You have no notes. You can",

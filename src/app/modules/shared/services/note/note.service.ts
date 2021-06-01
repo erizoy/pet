@@ -13,7 +13,7 @@ import { Note } from '../../../../models/note';
   providedIn: 'root'
 })
 export class NoteService extends BaseService {
-  #uid?: string; // Authenticated user id
+  #email: string | null = null; // Authenticated user iemail
   #notes?: AngularFireList<Note> = this.db.list<Note>(`notes`); // Reference to firebase rtdb notes
   #notes$?: Subscription; // Subscription on notes changes
   notes$ = new BehaviorSubject<Note[]>([]); // Behavior subject for all notes, where user is owner
@@ -29,9 +29,9 @@ export class NoteService extends BaseService {
     super(dialog);
     // Subscription on current authenticated user. Emits on first load or after user's login.
     this.auth.user$.subscribe(user => {
-      if (user && user.uid) {
-        this.#uid = user.uid;
-        this.#notes = this.db.list<Note>(`notes`, ref => ref.orderByChild('userId').equalTo(user.uid));
+      if (user && user.email) {
+        this.#email = user.email;
+        this.#notes = this.db.list<Note>(`notes`, ref => ref.orderByChild('owner').equalTo(user.email));
         this.#notes$?.unsubscribe();
         this.#notes$ = this.#notes.valueChanges([], {idField: 'uuid'}).pipe(
           catchError(this.errorHandler.bind(this)),
@@ -54,7 +54,8 @@ export class NoteService extends BaseService {
           this.filteredNotes$.next(notes);
         });
       } else {
-        this.#notes = this.#uid = undefined;
+        this.#notes = undefined;
+        this.#email = null;
         this.#notes$?.unsubscribe();
         this.notes$.next([]);
         this.filteredNotes$.next([]);
@@ -70,7 +71,7 @@ export class NoteService extends BaseService {
   create(): string | null {
     const data: Partial<Note> = {
       text: '',
-      userId: this.#uid as string,
+      owner: this.#email as string,
       hashtags: []
     };
 

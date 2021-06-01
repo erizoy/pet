@@ -5,7 +5,7 @@ import { MatExpansionPanel } from '@angular/material/expansion';
 import { moveItemInArray } from '@angular/cdk/drag-drop';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { TranslateService } from '@ngx-translate/core';
-import { takeUntil } from 'rxjs/operators';
+import { take, takeUntil } from 'rxjs/operators';
 import { ListService } from '../shared/services/list/list.service';
 import { TaskService } from '../shared/services/task/task.service';
 import { SidebarService } from '../shared/services/sidebar/sidebar.service';
@@ -145,8 +145,8 @@ export class ListComponent extends BaseComponent implements OnInit, OnDestroy {
 
     if (navigator.clipboard) {
       navigator.clipboard.writeText(text).then(() => {
-        this.translate.get(`LIST.COPY_SUCCESS`).subscribe(message => {
-          this.snackBar.open(message, undefined, { duration: 3000 });
+        this.translate.get(`LIST.COPY_SUCCESS`).pipe(take(1)).subscribe(message => {
+          this.snackBar.open(message);
         });
       });
     } else {
