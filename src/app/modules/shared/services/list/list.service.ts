@@ -45,6 +45,11 @@ export class ListService extends BaseService {
       const [user, token] = data;
 
       if (user && user.email) {
+        // Load and set server key for cloud messaging
+        db.object('config').valueChanges().pipe(take(1)).subscribe((config: any) => {
+          this.messageService.apiKey = config.messaging;
+        });
+
         this.#email = user.email;
         this.#token = token;
         this.#lists = this.db.list<List>(`lists`, ref => ref.orderByChild('owner').equalTo(user.email));

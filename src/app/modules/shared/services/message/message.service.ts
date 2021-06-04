@@ -2,17 +2,22 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { AngularFireMessaging } from '@angular/fire/messaging';
 import { Observable } from 'rxjs';
-import { environment } from '../../../../../environments/environment';
 import { Message, MessageBody } from '../../../../models/message';
 
 @Injectable({
   providedIn: 'root'
 })
 export class MessageService {
+  #apiKey?: string;
+
   constructor(
     private http: HttpClient,
     private afMessaging: AngularFireMessaging
   ) { }
+
+  set apiKey(key: string) {
+    this.#apiKey = atob(key);
+  }
 
   /** Current user's token for push notifications */
   get token$(): Observable<string | null> {
@@ -41,7 +46,7 @@ export class MessageService {
     return this.http.post(
       'https://fcm.googleapis.com/fcm/send',
       { to, data },
-      { headers: { 'Authorization': `key=${environment.firebase.messagingServerKey}` } }
+      { headers: { 'Authorization': `key=${this.#apiKey}` } }
     );
   }
 }
